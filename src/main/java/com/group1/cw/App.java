@@ -78,11 +78,19 @@ public class App
         // Connect to database
         a.connect();
 
+        // Get Country
+        Country cou = a.getCountry(129);
+        // Display results
+        a.displayCountry(cou);
+
         // Disconnect from database
         a.disconnect();
     }
 
-    public Country getCountry(int ID)
+    /**
+     * getCountry
+     */
+    public Country getCountry(int Capital)
     {
         try
         {
@@ -92,15 +100,15 @@ public class App
             String strSelect =
                     "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
                             + "FROM country "
-                            + "WHERE Code = " + ID;
+                            + "WHERE Capital = " + Capital;
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
+            // Return new country if valid.
             // Check one is returned
             if (rset.next())
             {
                 Country cou = new Country();
-                cou.Code = rset.getInt("Code");
+                cou.Code = rset.getString("Code");
                 cou.Name = rset.getString("Name");
                 cou.Continent = rset.getString("Continent");
                 cou.Region = rset.getString("Region");
@@ -110,11 +118,11 @@ public class App
                 cou.LifeExpectancy = rset.getInt("LifeExpectancy");
                 cou.GNP = rset.getInt("GNP");
                 cou.GNPOld = rset.getInt("GNPOld");
-                cou.LocalName = rset.getInt("LocalName");
-                cou.GovermentForm = rset.getInt("GovermentForm");
-                cou.HeadOfState = rset.getInt("HeadOfState");
+                cou.LocalName = rset.getString("LocalName");
+                cou.GovernmentForm = rset.getString("GovernmentForm");
+                cou.HeadOfState = rset.getString("HeadOfState");
                 cou.Capital = rset.getInt("Capital");
-                cou.Code2 = rset.getInt("Code2");
+                cou.Code2 = rset.getString("Code2");
                 return cou;
             }
             else
@@ -123,8 +131,35 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get employee details");
+            System.out.println("Failed to get country details");
             return null;
         }
     }
+
+    /**
+     * Display Country
+     */
+    public void displayCountry(Country cou)
+    {
+        if (cou != null)
+        {
+            System.out.println(
+                    cou.Code + " "
+                            + cou.Name + "\n"
+                            + "Continent: " + cou.Continent + "\n"
+                            + "Region: " + cou.Region + "\n"
+                            + "SurfaceArea: " + cou.SurfaceArea + "\n"
+                            + "IndepYear: " + cou.IndepYear + "\n"
+                            + "Population: " + cou.Population + "\n"
+                            + "LifeExpectancy: " + cou.LifeExpectancy + "\n"
+                            + "GNP: " + cou.GNP + "\n"
+                            + "GNPOld: " + cou.GNPOld + "\n"
+                            + "LocalName: " + cou.LocalName + "\n"
+                            + "GovernmentForm: " + cou.GovernmentForm + "\n"
+                            + "HeadOfState: " + cou.HeadOfState + "\n"
+                            + "Capital: " + cou.Capital + "\n"
+                            + "Code2: " + cou.Code2 + "\n");
+        }
+    }
+
 }

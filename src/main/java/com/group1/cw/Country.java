@@ -8,7 +8,7 @@ public class Country
     /**
      * Country's Code
      */
-    public int Code;
+    public String Code;
 
     /**
      * Country's Name
@@ -58,17 +58,17 @@ public class Country
     /**
      * Country's Local Name
      */
-    public int LocalName;
+    public String LocalName;
 
     /**
-     * Country's Goverment Form
+     * Country's GovernmentForm
      */
-    public int GovermentForm;
+    public String GovernmentForm;
 
     /**
      * Country's Head of State
      */
-    public int HeadOfState;
+    public String HeadOfState;
 
     /**
      * Country's Capital
@@ -78,5 +78,5 @@ public class Country
     /**
      * Country's Code2
      */
-    public int Code2;
+    public String Code2;
 }
