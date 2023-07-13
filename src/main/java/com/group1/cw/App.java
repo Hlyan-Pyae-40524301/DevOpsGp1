@@ -81,4 +81,50 @@ public class App
         // Disconnect from database
         a.disconnect();
     }
+
+    public Country getCountry(int ID)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
+                            + "FROM country "
+                            + "WHERE Code = " + ID;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Country cou = new Country();
+                cou.Code = rset.getInt("Code");
+                cou.Name = rset.getString("Name");
+                cou.Continent = rset.getString("Continent");
+                cou.Region = rset.getString("Region");
+                cou.SurfaceArea = rset.getInt("SurfaceArea");
+                cou.IndepYear = rset.getInt("IndepYear");
+                cou.Population = rset.getInt("Population");
+                cou.LifeExpectancy = rset.getInt("LifeExpectancy");
+                cou.GNP = rset.getInt("GNP");
+                cou.GNPOld = rset.getInt("GNPOld");
+                cou.LocalName = rset.getInt("LocalName");
+                cou.GovermentForm = rset.getInt("GovermentForm");
+                cou.HeadOfState = rset.getInt("HeadOfState");
+                cou.Capital = rset.getInt("Capital");
+                cou.Code2 = rset.getInt("Code2");
+                return cou;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get employee details");
+            return null;
+        }
+    }
 }
