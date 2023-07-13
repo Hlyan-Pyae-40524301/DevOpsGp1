@@ -1,13 +1,13 @@
 # ReadMe
 # Software Engineering Methods
 
-![workflow](https://github.com/Hlyan-Pyae-40524301/DevOpsGp/actions/workflows/main.yml/badge.svg)
+![workflow](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/actions/workflows/main.yml/badge.svg)
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Hlyan-Pyae-40524301/DevOpsGp/main.yml?branch=develop)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Hlyan-Pyae-40524301/DevOpsGp1/main.yml?branch=develop)
 
-[![LICENSE](https://img.shields.io/github/license/Hlyan-Pyae-40524301/DevOpsGp.svg?style=flat-square)](https://github.com/Hlyan-Pyae-40524301/DevOpsGp/blob/master/LICENSE)
+[![LICENSE](https://img.shields.io/github/license/Hlyan-Pyae-40524301/DevOpsGp1.svg?style=flat-square)](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/blob/master/LICENSE)
 
-[![Releases](https://img.shields.io/github/release/Hlyan-Pyae-40524301/DevOpsGp/all.svg?style=flat-square)](https://github.com/Hlyan-Pyae-40524301/DevOpsGp/releases)
+[![Releases](https://img.shields.io/github/release/Hlyan-Pyae-40524301/DevOpsGp1/all.svg?style=flat-square)](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/releases)
 
 Setting up our development environment for the module is the goal of this lab. The majority of the tools we will put up today are among the many that we will use in the module. The systems we'll employ are:
 
