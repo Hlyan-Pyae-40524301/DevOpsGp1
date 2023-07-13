@@ -1,28 +1,22 @@
-name: A workflow for my Hello World App
+name: A workflow for my App
 on: push
 
 jobs:
   build:
-    name: Hello world action
+    name: Workflow action
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - name: Set up JDK 16
         uses: actions/setup-java@v2
         with:
           java-version: '16'
           distribution: 'adopt'
-      - name: Setup network
-        run: |
-          docker network create --driver bridge dev-ops-gp1
-          docker pull mongo
-          docker run -d --name mongo-dbserver --network dev-ops-gp1 mongo
       - name: Build with Maven
         run: mvn package
-      - name: Build
-        run: docker build -t dev-ops-gp1 .
-      - name: Run image
-        run: docker run --network dev-ops-gp1 --name semcontainer dev-ops-gp1
-      - name: view logs
-        run: docker logs semcontainer
+      - name: Run docker compose
+        run: docker-compose up --abort-on-container-exit
+
