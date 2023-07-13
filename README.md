@@ -3,7 +3,7 @@
 
 ![workflow](https://github.com/Hlyan-Pyae-40524301/DevOpsGp/actions/workflows/main.yml/badge.svg)
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Hlyan-Pyae-40524301/sem/main.yml?branch=develop)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Hlyan-Pyae-40524301/DevOpsGp/main.yml?branch=develop)
 
 [![LICENSE](https://img.shields.io/github/license/Hlyan-Pyae-40524301/DevOpsGp.svg?style=flat-square)](https://github.com/Hlyan-Pyae-40524301/DevOpsGp/blob/master/LICENSE)
 
