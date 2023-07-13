@@ -1,6 +1,7 @@
 package com.group1.cw;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -78,10 +79,16 @@ public class App
         // Connect to database
         a.connect();
 
-        // Get Country
-        Country cou = a.getCountry(129);
-        // Display results
-        a.displayCountry(cou);
+//        // Get Country
+//        Country cou = a.getCountry(129);
+//        // Display results
+//        a.displayCountry(cou);
+
+        // Extract employee salary information
+        ArrayList<Country> country = a.getAllCountryByPopulation();
+
+        // Test the size of the returned data - should be 240124
+        System.out.println(country.size());
 
         // Disconnect from database
         a.disconnect();
@@ -159,6 +166,46 @@ public class App
                             + "HeadOfState: " + cou.HeadOfState + "\n"
                             + "Capital: " + cou.Capital + "\n"
                             + "Code2: " + cou.Code2 + "\n");
+        }
+    }
+
+    /**
+     * Gets all the current countries.
+     * @return A list of all counties, or null if there is an error.
+     */
+    public ArrayList<Country> getAllCountryByPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
+                            + "FROM country "
+                            + "ORDER BY Population ASC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<Country> country = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country cou = new Country();
+                cou.Code = rset.getString("Code");
+                cou.Name = rset.getString("Name");
+                cou.Continent = rset.getString("Continent");
+                cou.Region = rset.getString("Region");
+                cou.Population = rset.getInt("Population");
+                cou.Capital = rset.getInt("Capital");
+                country.add(cou);
+            }
+            return country;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
         }
     }
 
