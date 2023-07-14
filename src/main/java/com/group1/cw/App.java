@@ -142,6 +142,14 @@ public class App
         // Print Cities By Population (city)
         a.printCitiesByPopulation(city);
 
+        // Cities in a Continent
+        // Extract city country information
+        ArrayList<City> city1 = a.getAllCitiesInContinentByPopulation();
+        // Test the size of the returned data
+        System.out.println(city1.size());
+        // Print Cities in a Continent By Population (city)
+        a.printCitiesInContinentByPopulation(city1);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -669,6 +677,71 @@ public class App
         System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
         // Loop over all countries in the list
         for (City cit : city)
+        {
+            String cit_string =
+                    String.format("%-30s %-30s %-30s %-30s",
+                            cit.Name, cit.CountryCode, cit.District, cit.Population);
+            System.out.println(cit_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /**
+     * Gets all the current City and Country.
+     * @return A list of all Cities and Countries by largest population to smallest, or null if there is an error.
+     */
+    public ArrayList<City> getAllCitiesInContinentByPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population " +
+                            "FROM city, country " +
+                            "WHERE city.CountryCode = country.Code AND country.Continent = 'Asia'" +
+                            "ORDER BY city.Population DESC;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> city1 = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.Name = rset.getString("city.Name");
+                cit.CountryCode = rset.getString("country.Name");
+                cit.District = rset.getString("city.District");
+                cit.Population = rset.getInt("city.Population");
+                city1.add(cit);
+            }
+            return city1;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of country.
+     * @param city1 The list of country to print.
+     */
+    public void printCitiesInContinentByPopulation(ArrayList<City> city1)
+    {
+        // Title
+        System.out.println("Cities In A Continent Report by Highest Population to Lowest");
+
+        // Print header
+        System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
+        // Loop over all countries in the list
+        for (City cit : city1)
         {
             String cit_string =
                     String.format("%-30s %-30s %-30s %-30s",
