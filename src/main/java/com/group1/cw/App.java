@@ -93,6 +93,15 @@ public class App
         // Print Countries By Population (country)
         a.printCountriesByPopulation(country);
 
+        // Extract employee salary information
+        ArrayList<Country> country1 = a.getAllCountryInContinentByPopulation();
+
+        // Test the size of the returned data - should be 240124
+        System.out.println(country1.size());
+
+        // Print Countries in a Continent By Population (country)
+        a.printCountriesInContinentByPopulation(country1);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -173,8 +182,8 @@ public class App
     }
 
     /**
-     * Gets all the current employees and salaries.
-     * @return A list of all employees and salaries, or null if there is an error.
+     * Gets all the current Country and City.
+     * @return A list of all Countries and Cities by largest population to smallest, or null if there is an error.
      */
     public ArrayList<Country> getAllCountryByPopulation()
     {
@@ -219,16 +228,90 @@ public class App
      */
     public void printCountriesByPopulation(ArrayList<Country> country)
     {
+        // Title
+        System.out.println("Country Report by Highest Population to Lowest");
+
         // Print header
-        System.out.println(String.format("%-10s %-20s %-20s %-20s %-10s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        System.out.println(String.format("%-10s %-20s %-20s %-20s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Loop over all countries in the list
         for (Country cou : country)
         {
             String cou_string =
-                    String.format("%-10s %-20s %-20s %-20s %-10s %-20s",
+                    String.format("%-10s %-20s %-20s %-20s %-20s %-20s",
                             cou.Code, cou.Name, cou.Continent, cou.Region, cou.Population, cou.Capital);
             System.out.println(cou_string);
         }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /**
+     * Gets all the current Country and City.
+     * @return A list of Countries and Cities in Asia by largest population to smallest or null if there is an error.
+     */
+    public ArrayList<Country> getAllCountryInContinentByPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name "
+                            + "FROM country, city "
+                            + "WHERE country.Code = city.CountryCode AND country.Continent = 'Asia'"
+                            + "ORDER BY country.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<Country> country1 = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country cou = new Country();
+                cou.Code = rset.getString("country.Code");
+                cou.Name = rset.getString("country.Name");
+                cou.Continent = rset.getString("country.Continent");
+                cou.Region = rset.getString("country.Region");
+                cou.Population = rset.getInt("country.Population");
+                cou.Capital = rset.getString("city.Name");
+                country1.add(cou);
+            }
+            return country1;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of country.
+     * @param country1 The list of country to print.
+     */
+    public void printCountriesInContinentByPopulation(ArrayList<Country> country1)
+    {
+        // Title
+        System.out.println("Country Report In a Continent by Highest Population to Lowest");
+        // Print header
+        System.out.println(String.format("%-10s %-20s %-20s %-20s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        // Loop over all countries in the list
+        for (Country cou : country1)
+        {
+            String cou_string =
+                    String.format("%-10s %-20s %-20s %-20s %-20s %-20s",
+                            cou.Code, cou.Name, cou.Continent, cou.Region, cou.Population, cou.Capital);
+            System.out.println(cou_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
     }
 
 }
