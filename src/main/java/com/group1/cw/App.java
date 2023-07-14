@@ -84,23 +84,30 @@ public class App
 //        // Display results
 //        a.displayCountry(cou);
 
-        // Extract employee salary information
+
+        // Countries
+        // Extract country city information
         ArrayList<Country> country = a.getAllCountryByPopulation();
-
-        // Test the size of the returned data - should be 240124
+        // Test the size of the returned data
         System.out.println(country.size());
-
         // Print Countries By Population (country)
         a.printCountriesByPopulation(country);
 
-        // Extract employee salary information
+        // Countries in a Continent
+        // Extract country city information
         ArrayList<Country> country1 = a.getAllCountryInContinentByPopulation();
-
-        // Test the size of the returned data - should be 240124
+        // Test the size of the returned data
         System.out.println(country1.size());
-
         // Print Countries in a Continent By Population (country)
         a.printCountriesInContinentByPopulation(country1);
+
+        // Countries in a Region
+        // Extract country city information
+        ArrayList<Country> country2 = a.getAllCountryInRegionByPopulation();
+        // Test the size of the returned data
+        System.out.println(country2.size());
+        // Print Countries in a Region By Population (country)
+        a.printCountriesInRegionByPopulation(country2);
 
         // Disconnect from database
         a.disconnect();
@@ -301,6 +308,71 @@ public class App
         System.out.println(String.format("%-10s %-20s %-20s %-20s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Loop over all countries in the list
         for (Country cou : country1)
+        {
+            String cou_string =
+                    String.format("%-10s %-20s %-20s %-20s %-20s %-20s",
+                            cou.Code, cou.Name, cou.Continent, cou.Region, cou.Population, cou.Capital);
+            System.out.println(cou_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+    /**
+     * Gets all the current Country and City.
+     * @return A list of Countries and Cities in South America by largest population to smallest or null if there is an error.
+     */
+    public ArrayList<Country> getAllCountryInRegionByPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name "
+                            + "FROM country, city "
+                            + "WHERE country.Code = city.CountryCode AND country.Region = 'South America'"
+                            + "ORDER BY country.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<Country> country2 = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country cou = new Country();
+                cou.Code = rset.getString("country.Code");
+                cou.Name = rset.getString("country.Name");
+                cou.Continent = rset.getString("country.Continent");
+                cou.Region = rset.getString("country.Region");
+                cou.Population = rset.getInt("country.Population");
+                cou.Capital = rset.getString("city.Name");
+                country2.add(cou);
+            }
+            return country2;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of country.
+     * @param country2 The list of country to print.
+     */
+    public void printCountriesInRegionByPopulation(ArrayList<Country> country2)
+    {
+        // Title
+        System.out.println("Country Report In a Region by Highest Population to Lowest");
+        // Print header
+        System.out.println(String.format("%-10s %-20s %-20s %-20s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        // Loop over all countries in the list
+        for (Country cou : country2)
         {
             String cou_string =
                     String.format("%-10s %-20s %-20s %-20s %-20s %-20s",
