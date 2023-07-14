@@ -109,6 +109,14 @@ public class App
         // Print Countries in a Region By Population (country)
         a.printCountriesInRegionByPopulation(country2);
 
+        // Top Populated Countries
+        // Extract country city information
+        ArrayList<Country> country3 = a.getTopPopulatedCountries();
+        // Test the size of the returned data
+        System.out.println(country3.size());
+        // Print Top Populated Countries (country)
+        a.printTopPopulatedCountries(country3);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -373,6 +381,72 @@ public class App
         System.out.println(String.format("%-10s %-20s %-20s %-20s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Loop over all countries in the list
         for (Country cou : country2)
+        {
+            String cou_string =
+                    String.format("%-10s %-20s %-20s %-20s %-20s %-20s",
+                            cou.Code, cou.Name, cou.Continent, cou.Region, cou.Population, cou.Capital);
+            System.out.println(cou_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /** Gets all the current Country and City.
+     * @return A list of all Countries and Cities by largest population to smallest, or null if there is an error.
+     */
+    public ArrayList<Country> getTopPopulatedCountries()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Code, country.Name, country.Continent, country.Region, country.Population, city.Name "
+                            + "FROM country, city "
+                            + "WHERE country.Code = city.CountryCode "
+                            + "ORDER BY country.Population DESC " + "LIMIT 10";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<Country> country3 = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country cou = new Country();
+                cou.Code = rset.getString("country.Code");
+                cou.Name = rset.getString("country.Name");
+                cou.Continent = rset.getString("country.Continent");
+                cou.Region = rset.getString("country.Region");
+                cou.Population = rset.getInt("country.Population");
+                cou.Capital = rset.getString("city.Name");
+                country3.add(cou);
+            }
+            return country3;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of country.
+     * @param country3 The list of country to print.
+     */
+    public void printTopPopulatedCountries(ArrayList<Country> country3)
+    {
+        // Title
+        System.out.println("Top Populated Countries Report");
+
+        // Print header
+        System.out.println(String.format("%-10s %-20s %-20s %-20s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        // Loop over all countries in the list
+        for (Country cou : country3)
         {
             String cou_string =
                     String.format("%-10s %-20s %-20s %-20s %-20s %-20s",
