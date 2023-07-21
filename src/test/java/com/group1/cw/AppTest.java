@@ -188,5 +188,39 @@ public class AppTest
         app.printTopPopulatedCountriesInContinent(country4);
     }
 
+    //Testing for Top Populated Countries In Region Report by Population
+    @Test
+    void printTopPopulatedCountriesInRegionTestNull()
+    {
+        app.printTopPopulatedCountriesInRegion(null);
+    }
+    @Test
+    void printCTopPopulatedCountriesInRegionTestEmpty()
+    {
+        ArrayList<Country> country5 = new ArrayList<Country>();
+        app.printTopPopulatedCountriesInRegion(country5);
+    }
+    @Test
+    void printTopPopulatedCountriesInRegionTestContainsNull()
+    {
+        ArrayList<Country> country5 = new ArrayList<Country>();
+        country5.add(null);
+        app.printTopPopulatedCountriesInRegion(country5);
+    }
+    @Test
+    void printTopPopulatedCountriesInRegion()
+    {
+        ArrayList<Country> country5 = new ArrayList<Country>();
+        Country cou = new Country();
+        cou.Code = "USA";
+        cou.Name = "United States";
+        cou.Continent = "North America";
+        cou.Region = "North America";
+        cou.Population = 278357000;
+        cou.Capital = "3816";
+        country5.add(cou);
+        app.printTopPopulatedCountriesInRegion(country5);
+    }
+
 
 }
