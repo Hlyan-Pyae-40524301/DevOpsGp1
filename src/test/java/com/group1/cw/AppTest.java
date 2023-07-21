@@ -478,5 +478,37 @@ public class AppTest
         app.printTopPopulatedCitiesInRegion(city7);
     }
 
+    //Testing for Top Populated Cities In Country Report by Population
+    @Test
+    void printTopPopulatedCitiesInCountryTestNull()
+    {
+        app.printTopPopulatedCitiesInCountry(null);
+    }
+    @Test
+    void printTopPopulatedCitiesInCountryTestEmpty()
+    {
+        ArrayList<City> city8 = new ArrayList<City>();
+        app.printTopPopulatedCitiesInCountry(city8);
+    }
+    @Test
+    void printTopPopulatedCitiesInCountryTestContainsNull()
+    {
+        ArrayList<City> city8 = new ArrayList<City>();
+        city8.add(null);
+        app.printTopPopulatedCitiesInCountry(city8);
+    }
+    @Test
+    void printTopPopulatedCitiesInCountry()
+    {
+        ArrayList<City> city8 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Rangoon (Yangon)";
+        cit.CountryCode = "MMR";
+        cit.District = "Rangoon [Yangon]";
+        cit.Population = 3361700;
+        city8.add(cit);
+        app.printTopPopulatedCitiesInCountry(city8);
+    }
+
 
 }
