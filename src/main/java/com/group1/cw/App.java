@@ -490,6 +490,13 @@ public class App
      */
     public void printCountriesInRegionByPopulation(ArrayList<Country> country2)
     {
+        // Check employees is not null
+        if (country2 == null)
+        {
+            System.out.println("No countries in continent");
+            return;
+        }
+
         // Title
         System.out.println("Country Report In a Region (South America) by Highest Population to Lowest");
         // Print header
@@ -497,6 +504,8 @@ public class App
         // Loop over all countries in the list
         for (Country cou : country2)
         {
+            if (cou == null)
+                continue;
             String cou_string =
                     String.format("%-10s %-20s %-20s %-20s %-20s %-20s",
                             cou.Code, cou.Name, cou.Continent, cou.Region, cou.Population, cou.Capital);

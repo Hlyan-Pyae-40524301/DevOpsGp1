@@ -42,12 +42,12 @@ public class AppTest
     {
         ArrayList<Country> country = new ArrayList<Country>();
         Country cou = new Country();
-        cou.Code = "MMR";
-        cou.Name = "Myanmar";
+        cou.Code = "CHN";
+        cou.Name = "China";
         cou.Continent = "Asia";
-        cou.Region = "Southeast Asia";
-        cou.Population = 45611000;
-        cou.Capital = "2710";
+        cou.Region = "Eastern Asia";
+        cou.Population = 1277558000;
+        cou.Capital = "1891";
         country.add(cou);
         app.printCountriesByPopulation(country);
     }
@@ -76,14 +76,48 @@ public class AppTest
     {
         ArrayList<Country> country1 = new ArrayList<Country>();
         Country cou = new Country();
-        cou.Code = "MMR";
-        cou.Name = "Myanmar";
+        cou.Code = "CHN";
+        cou.Name = "China";
         cou.Continent = "Asia";
-        cou.Region = "Southeast Asia";
-        cou.Population = 45611000;
-        cou.Capital = "2710";
+        cou.Region = "Eastern Asia";
+        cou.Population = 1277558000;
+        cou.Capital = "1891";
         country1.add(cou);
         app.printCountriesInContinentByPopulation(country1);
+    }
+
+    //Testing for Countries In Region Report by Population
+    @Test
+    void printCountriesInRegionTestNull()
+    {
+        app.printCountriesInRegionByPopulation(null);
+    }
+    @Test
+    void printCountriesInRegionTestEmpty()
+    {
+        ArrayList<Country> country2 = new ArrayList<Country>();
+        app.printCountriesInRegionByPopulation(country2);
+    }
+    @Test
+    void printCountriesInRegionTestContainsNull()
+    {
+        ArrayList<Country> country2 = new ArrayList<Country>();
+        country2.add(null);
+        app.printCountriesInRegionByPopulation(country2);
+    }
+    @Test
+    void printCountriesInRegion()
+    {
+        ArrayList<Country> country2 = new ArrayList<Country>();
+        Country cou = new Country();
+        cou.Code = "BRA";
+        cou.Name = "Brazil";
+        cou.Continent = "South America";
+        cou.Region = "South America";
+        cou.Population = 170115000;
+        cou.Capital = "211";
+        country2.add(cou);
+        app.printCountriesInRegionByPopulation(country2);
     }
 
 
