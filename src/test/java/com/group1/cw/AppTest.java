@@ -120,7 +120,7 @@ public class AppTest
         app.printCountriesInRegionByPopulation(country2);
     }
 
-    //Testing for Countries In Region Report by Population
+    //Testing for Top Populated Countries Report by Population
     @Test
     void printTopPopulatedCountriesTestNull()
     {
@@ -152,6 +152,40 @@ public class AppTest
         cou.Capital = "1891";
         country3.add(cou);
         app.printTopPopulatedCountries(country3);
+    }
+
+    //Testing for Top Populated Countries In Continent Report by Population
+    @Test
+    void printTopPopulatedCountriesInContinentTestNull()
+    {
+        app.printTopPopulatedCountriesInContinent(null);
+    }
+    @Test
+    void printCTopPopulatedCountriesInContinentTestEmpty()
+    {
+        ArrayList<Country> country4 = new ArrayList<Country>();
+        app.printTopPopulatedCountriesInContinent(country4);
+    }
+    @Test
+    void printTopPopulatedCountriesInContinentTestContainsNull()
+    {
+        ArrayList<Country> country4 = new ArrayList<Country>();
+        country4.add(null);
+        app.printTopPopulatedCountriesInContinent(country4);
+    }
+    @Test
+    void printTopPopulatedCountriesInContinent()
+    {
+        ArrayList<Country> country4 = new ArrayList<Country>();
+        Country cou = new Country();
+        cou.Code = "CHN";
+        cou.Name = "China";
+        cou.Continent = "Asia";
+        cou.Region = "Eastern Asia";
+        cou.Population = 1277558000;
+        cou.Capital = "1891";
+        country4.add(cou);
+        app.printTopPopulatedCountriesInContinent(country4);
     }
 
 
