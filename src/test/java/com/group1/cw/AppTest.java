@@ -18,19 +18,18 @@ public class AppTest
         app = new App();
     }
 
+    //Testing for Countries Report by Population
     @Test
     void printCountriesTestNull()
     {
         app.printCountriesByPopulation(null);
     }
-
     @Test
     void printCountriesTestEmpty()
     {
         ArrayList<Country> country = new ArrayList<Country>();
         app.printCountriesByPopulation(country);
     }
-
     @Test
     void printCountriesTestContainsNull()
     {
@@ -38,7 +37,6 @@ public class AppTest
         country.add(null);
         app.printCountriesByPopulation(country);
     }
-
     @Test
     void printCountries()
     {
@@ -53,4 +51,40 @@ public class AppTest
         country.add(cou);
         app.printCountriesByPopulation(country);
     }
+
+    //Testing for Countries In Continent Report by Population
+    @Test
+    void printCountriesInContinentTestNull()
+    {
+        app.printCountriesInContinentByPopulation(null);
+    }
+    @Test
+    void printCountriesInContinentTestEmpty()
+    {
+        ArrayList<Country> country1 = new ArrayList<Country>();
+        app.printCountriesInContinentByPopulation(country1);
+    }
+    @Test
+    void printCountriesInContinentTestContainsNull()
+    {
+        ArrayList<Country> country1 = new ArrayList<Country>();
+        country1.add(null);
+        app.printCountriesInContinentByPopulation(country1);
+    }
+    @Test
+    void printCountriesInContinent()
+    {
+        ArrayList<Country> country1 = new ArrayList<Country>();
+        Country cou = new Country();
+        cou.Code = "MMR";
+        cou.Name = "Myanmar";
+        cou.Continent = "Asia";
+        cou.Region = "Southeast Asia";
+        cou.Population = 45611000;
+        cou.Capital = "2710";
+        country1.add(cou);
+        app.printCountriesInContinentByPopulation(country1);
+    }
+
+
 }

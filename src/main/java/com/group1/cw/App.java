@@ -416,6 +416,13 @@ public class App
      */
     public void printCountriesInContinentByPopulation(ArrayList<Country> country1)
     {
+        // Check employees is not null
+        if (country1 == null)
+        {
+            System.out.println("No countries in continent");
+            return;
+        }
+
         // Title
         System.out.println("Country Report In a Continent (Asia) by Highest Population to Lowest");
         // Print header
@@ -423,6 +430,8 @@ public class App
         // Loop over all countries in the list
         for (Country cou : country1)
         {
+            if (cou == null)
+                continue;
             String cou_string =
                     String.format("%-10s %-20s %-20s %-20s %-20s %-20s",
                             cou.Code, cou.Name, cou.Continent, cou.Region, cou.Population, cou.Capital);
