@@ -198,6 +198,14 @@ public class App
         // Print Top Populated Cities In Region (city)
         a.printTopPopulatedCitiesInRegion(city7);
 
+        // Top Populated Cities In Country
+        // Extract city country information
+        ArrayList<City> city8 = a.getTopPopulatedCitiesInCountry();
+        // Test the size of the returned data
+        System.out.println(city8.size());
+        // Print Top Populated Cities In Country (city)
+        a.printTopPopulatedCitiesInCountry(city8);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -1185,6 +1193,72 @@ public class App
         System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
         // Loop over all cities in the list
         for (City cit : city7)
+        {
+            String cit_string =
+                    String.format("%-30s %-30s %-30s %-30s",
+                            cit.Name, cit.CountryCode, cit.District, cit.Population);
+            System.out.println(cit_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /** Gets the current City and Country.
+     * @return A list of Top Cities and Countries in Country by largest population to smallest, or null if there is an error.
+     */
+    public ArrayList<City> getTopPopulatedCitiesInCountry()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population " +
+                            "FROM city, country " +
+                            "WHERE city.CountryCode = country.Code " +
+                            "AND country.Name='Myanmar' " +
+                            "ORDER BY city.Population " +
+                            "DESC LIMIT 10; ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract City information
+            ArrayList<City> city8 = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.Name = rset.getString("city.Name");
+                cit.CountryCode = rset.getString("country.Name");
+                cit.District = rset.getString("city.District");
+                cit.Population = rset.getInt("city.Population");
+                city8.add(cit);
+            }
+            return city8;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of country.
+     * @param city8 The list of city to print.
+     */
+    public void printTopPopulatedCitiesInCountry(ArrayList<City> city8)
+    {
+        // Title
+        System.out.println("Top Populated Cities In Country (Myanmar) Report");
+
+        // Print header
+        System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
+        // Loop over all cities in the list
+        for (City cit : city8)
         {
             String cit_string =
                     String.format("%-30s %-30s %-30s %-30s",
