@@ -1310,6 +1310,13 @@ public class App
      */
     public void printTopPopulatedCitiesInRegion(ArrayList<City> city7)
     {
+        // Check city is not null
+        if (city7 == null)
+        {
+            System.out.println("No top populated cities in Region");
+            return;
+        }
+
         // Title
         System.out.println("Top Populated Cities In Region (Southeast Asia) Report");
 
@@ -1318,6 +1325,8 @@ public class App
         // Loop over all cities in the list
         for (City cit : city7)
         {
+            if (cit == null)
+                continue;
             String cit_string =
                     String.format("%-30s %-30s %-30s %-30s",
                             cit.Name, cit.CountryCode, cit.District, cit.Population);

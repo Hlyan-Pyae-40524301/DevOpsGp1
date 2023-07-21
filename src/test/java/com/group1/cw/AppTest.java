@@ -443,7 +443,39 @@ public class AppTest
         cit.District = "Maharashtra";
         cit.Population = 10500000;
         city6.add(cit);
-        app.printTopPopulatedCities(city6);
+        app.printTopPopulatedCitiesInContinent(city6);
+    }
+
+    //Testing for Top Populated Cities In Region Report by Population
+    @Test
+    void printTopPopulatedCitiesInRegionTestNull()
+    {
+        app.printTopPopulatedCitiesInRegion(null);
+    }
+    @Test
+    void printTopPopulatedCitiesInRegionTestEmpty()
+    {
+        ArrayList<City> city7 = new ArrayList<City>();
+        app.printTopPopulatedCitiesInRegion(city7);
+    }
+    @Test
+    void printTopPopulatedCitiesInRegionTestContainsNull()
+    {
+        ArrayList<City> city7 = new ArrayList<City>();
+        city7.add(null);
+        app.printTopPopulatedCitiesInRegion(city7);
+    }
+    @Test
+    void printTopPopulatedCitiesInRegion()
+    {
+        ArrayList<City> city7 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Jakarta";
+        cit.CountryCode = "IDN";
+        cit.District = "Jakarta Raya";
+        cit.Population = 9604900;
+        city7.add(cit);
+        app.printTopPopulatedCitiesInRegion(city7);
     }
 
 
