@@ -222,7 +222,7 @@ public class AppTest
         app.printTopPopulatedCountriesInRegion(country5);
     }
 
-    //Testing for Top Populated Countries In Region Report by Population
+    //Testing for Cities Report by Population
     @Test
     void printCitiesTestNull()
     {
@@ -252,6 +252,38 @@ public class AppTest
         cit.Population = 10500000;
         city.add(cit);
         app.printCitiesByPopulation(city);
+    }
+
+    //Testing for Cities In Continent Report by Population
+    @Test
+    void printCitiesInContinentTestNull()
+    {
+        app.printCitiesInContinentByPopulation(null);
+    }
+    @Test
+    void printCitiesInContinentTestEmpty()
+    {
+        ArrayList<City> city1 = new ArrayList<City>();
+        app.printCitiesInContinentByPopulation(city1);
+    }
+    @Test
+    void printCitiesInContinentTestContainsNull()
+    {
+        ArrayList<City> city1 = new ArrayList<City>();
+        city1.add(null);
+        app.printCitiesInContinentByPopulation(city1);
+    }
+    @Test
+    void printCitiesInContinent()
+    {
+        ArrayList<City> city1 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Mumbai";
+        cit.CountryCode = "3974";
+        cit.District = "Maharashtra";
+        cit.Population = 10500000;
+        city1.add(cit);
+        app.printCitiesByPopulation(city1);
     }
 
 

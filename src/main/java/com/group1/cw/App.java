@@ -862,6 +862,13 @@ public class App
      */
     public void printCitiesInContinentByPopulation(ArrayList<City> city1)
     {
+        // Check employees is not null
+        if (city1 == null)
+        {
+            System.out.println("No cities in continent");
+            return;
+        }
+
         // Title
         System.out.println("Cities In A Continent (Asia) Report by Highest Population to Lowest");
 
@@ -870,6 +877,8 @@ public class App
         // Loop over all cities in the list
         for (City cit : city1)
         {
+            if (cit == null)
+                continue;
             String cit_string =
                     String.format("%-30s %-30s %-30s %-30s",
                             cit.Name, cit.CountryCode, cit.District, cit.Population);
