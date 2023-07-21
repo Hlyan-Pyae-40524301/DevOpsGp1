@@ -1087,6 +1087,13 @@ public class App
      */
     public void printCitiesInDistrictByPopulation(ArrayList<City> city4)
     {
+        // Check city is not null
+        if (city4 == null)
+        {
+            System.out.println("No cities in District");
+            return;
+        }
+
         // Title
         System.out.println("Cities in District (Mandalay) Report by Highest Population to Lowest");
 
@@ -1095,6 +1102,8 @@ public class App
         // Loop over all cities in the list
         for (City cit : city4)
         {
+            if (cit == null)
+                continue;
             String cit_string =
                     String.format("%-30s %-30s %-30s %-30s",
                             cit.Name, cit.CountryCode, cit.District, cit.Population);

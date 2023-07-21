@@ -350,5 +350,37 @@ public class AppTest
         app.printCitiesInCountryByPopulation(city3);
     }
 
+    //Testing for Cities In District Report by Population
+    @Test
+    void printCitiesInDistrictTestNull()
+    {
+        app.printCitiesInDistrictByPopulation(null);
+    }
+    @Test
+    void printCitiesInDistrictTestEmpty()
+    {
+        ArrayList<City> city4 = new ArrayList<City>();
+        app.printCitiesInDistrictByPopulation(city4);
+    }
+    @Test
+    void printCitiesInDistrictTestContainsNull()
+    {
+        ArrayList<City> city4 = new ArrayList<City>();
+        city4.add(null);
+        app.printCitiesInDistrictByPopulation(city4);
+    }
+    @Test
+    void printCitiesInDistrict()
+    {
+        ArrayList<City> city4 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Mandalay";
+        cit.CountryCode = "MMR";
+        cit.District = "Mandalay";
+        cit.Population = 885300;
+        city4.add(cit);
+        app.printCitiesInDistrictByPopulation(city4);
+    }
+
 
 }
