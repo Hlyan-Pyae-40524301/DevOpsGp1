@@ -493,7 +493,7 @@ public class App
         // Check employees is not null
         if (country2 == null)
         {
-            System.out.println("No countries in continent");
+            System.out.println("No countries in Region");
             return;
         }
 
@@ -564,6 +564,13 @@ public class App
      */
     public void printTopPopulatedCountries(ArrayList<Country> country3)
     {
+        // Check employees is not null
+        if (country3 == null)
+        {
+            System.out.println("No top populated countries");
+            return;
+        }
+
         // Title
         System.out.println("Top Populated Countries Report");
 
@@ -572,6 +579,8 @@ public class App
         // Loop over all countries in the list
         for (Country cou : country3)
         {
+            if (cou == null)
+                continue;
             String cou_string =
                     String.format("%-10s %-20s %-20s %-20s %-20s %-20s",
                             cou.Code, cou.Name, cou.Continent, cou.Region, cou.Population, cou.Capital);
