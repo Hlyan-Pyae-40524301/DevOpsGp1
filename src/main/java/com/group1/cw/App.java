@@ -158,6 +158,14 @@ public class App
         // Print Cities in a Region By Population (city)
         a.printCitiesInRegionByPopulation(city2);
 
+        // Cities in a Country
+        // Extract city country information
+        ArrayList<City> city3 = a.getAllCitiesInCountryByPopulation();
+        // Test the size of the returned data
+        System.out.println(city3.size());
+        // Print Cities in a Country By Population (city)
+        a.printCitiesInCountryByPopulation(city3);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -352,7 +360,7 @@ public class App
     public void printCountriesInContinentByPopulation(ArrayList<Country> country1)
     {
         // Title
-        System.out.println("Country Report In a Continent by Highest Population to Lowest");
+        System.out.println("Country Report In a Continent (Asia) by Highest Population to Lowest");
         // Print header
         System.out.println(String.format("%-10s %-20s %-20s %-20s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Loop over all countries in the list
@@ -417,7 +425,7 @@ public class App
     public void printCountriesInRegionByPopulation(ArrayList<Country> country2)
     {
         // Title
-        System.out.println("Country Report In a Region by Highest Population to Lowest");
+        System.out.println("Country Report In a Region (South America) by Highest Population to Lowest");
         // Print header
         System.out.println(String.format("%-10s %-20s %-20s %-20s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Loop over all countries in the list
@@ -548,7 +556,7 @@ public class App
     public void printTopPopulatedCountriesInContinent(ArrayList<Country> country4)
     {
         // Title
-        System.out.println("Top Populated Countries In a Continent Report");
+        System.out.println("Top Populated Countries In a Continent (Asia) Report");
 
         // Print header
         System.out.println(String.format("%-10s %-20s %-20s %-30s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
@@ -614,7 +622,7 @@ public class App
     public void printTopPopulatedCountriesInRegion(ArrayList<Country> country5)
     {
         // Title
-        System.out.println("Top Populated Countries In a Region Report");
+        System.out.println("Top Populated Countries In a Region (North America) Report");
 
         // Print header
         System.out.println(String.format("%-10s %-20s %-20s %-30s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
@@ -667,7 +675,7 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
+            System.out.println("Failed to get city details");
             return null;
         }
     }
@@ -700,7 +708,7 @@ public class App
 
     /**
      * Gets all the current City and Country.
-     * @return A list of all Cities and Countries by largest population to smallest, or null if there is an error.
+     * @return A list of Cities and Countries in Asia by largest population to smallest, or null if there is an error.
      */
     public ArrayList<City> getAllCitiesInContinentByPopulation()
     {
@@ -732,7 +740,7 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
+            System.out.println("Failed to get city details");
             return null;
         }
     }
@@ -744,7 +752,7 @@ public class App
     public void printCitiesInContinentByPopulation(ArrayList<City> city1)
     {
         // Title
-        System.out.println("Cities In A Continent Report by Highest Population to Lowest");
+        System.out.println("Cities In A Continent (Asia) Report by Highest Population to Lowest");
 
         // Print header
         System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
@@ -765,7 +773,7 @@ public class App
 
     /**
      * Gets all the current City and Country.
-     * @return A list of all Cities and Countries by largest population to smallest, or null if there is an error.
+     * @return A list of Cities and Countries in Southeast Asia by largest population to smallest, or null if there is an error.
      */
     public ArrayList<City> getAllCitiesInRegionByPopulation()
     {
@@ -798,7 +806,7 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
+            System.out.println("Failed to get city details");
             return null;
         }
     }
@@ -810,12 +818,78 @@ public class App
     public void printCitiesInRegionByPopulation(ArrayList<City> city2)
     {
         // Title
-        System.out.println("Cities In A Region Report by Highest Population to Lowest");
+        System.out.println("Cities In A Region (Southeast Asia) Report by Highest Population to Lowest");
 
         // Print header
         System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
         // Loop over all countries in the list
         for (City cit : city2)
+        {
+            String cit_string =
+                    String.format("%-30s %-30s %-30s %-30s",
+                            cit.Name, cit.CountryCode, cit.District, cit.Population);
+            System.out.println(cit_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /**
+     * Gets all the current City and Country.
+     * @return A list of Cities in Myanmar by largest population to smallest, or null if there is an error.
+     */
+    public ArrayList<City> getAllCitiesInCountryByPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population " +
+                            "FROM city, country " +
+                            "WHERE city.CountryCode = country.Code " +
+                            "AND country.Name='Myanmar' " +
+                            "ORDER BY city.Population DESC;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<City> city3 = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.Name = rset.getString("city.Name");
+                cit.CountryCode = rset.getString("country.Name");
+                cit.District = rset.getString("city.District");
+                cit.Population = rset.getInt("city.Population");
+                city3.add(cit);
+            }
+            return city3;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of country.
+     * @param city3 The list of country to print.
+     */
+    public void printCitiesInCountryByPopulation(ArrayList<City> city3)
+    {
+        // Title
+        System.out.println("Cities In A Country (Myanmar) Report by Highest Population to Lowest");
+
+        // Print header
+        System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
+        // Loop over all countries in the list
+        for (City cit : city3)
         {
             String cit_string =
                     String.format("%-30s %-30s %-30s %-30s",
