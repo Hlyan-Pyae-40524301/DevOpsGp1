@@ -510,5 +510,37 @@ public class AppTest
         app.printTopPopulatedCitiesInCountry(city8);
     }
 
+    //Testing for Top Populated Cities In District Report by Population
+    @Test
+    void printTopPopulatedCitiesInDistrictTestNull()
+    {
+        app.printTopPopulatedCitiesInDistrict(null);
+    }
+    @Test
+    void printTopPopulatedCitiesInDistrictTestEmpty()
+    {
+        ArrayList<City> city9 = new ArrayList<City>();
+        app.printTopPopulatedCitiesInDistrict(city9);
+    }
+    @Test
+    void printTopPopulatedCitiesInDistrictTestContainsNull()
+    {
+        ArrayList<City> city9 = new ArrayList<City>();
+        city9.add(null);
+        app.printTopPopulatedCitiesInDistrict(city9);
+    }
+    @Test
+    void printTopPopulatedCitiesInDistrict()
+    {
+        ArrayList<City> city9 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "New York";
+        cit.CountryCode = "USA";
+        cit.District = "New York";
+        cit.Population = 8008278;
+        city9.add(cit);
+        app.printTopPopulatedCitiesInDistrict(city9);
+    }
+
 
 }
