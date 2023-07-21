@@ -1161,6 +1161,13 @@ public class App
      */
     public void printTopPopulatedCities(ArrayList<City> city5)
     {
+        // Check city is not null
+        if (city5 == null)
+        {
+            System.out.println("No top populated cities");
+            return;
+        }
+
         // Title
         System.out.println("Top Populated Cities Report");
 
@@ -1169,6 +1176,8 @@ public class App
         // Loop over all cities in the list
         for (City cit : city5)
         {
+            if (cit == null)
+                continue;
             String cit_string =
                     String.format("%-30s %-30s %-30s %-30s",
                             cit.Name, cit.CountryCode, cit.District, cit.Population);

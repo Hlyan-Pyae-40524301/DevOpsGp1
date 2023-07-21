@@ -382,5 +382,37 @@ public class AppTest
         app.printCitiesInDistrictByPopulation(city4);
     }
 
+    //Testing for Top Populated Cities Report by Population
+    @Test
+    void printTopPopulatedCitiesTestNull()
+    {
+        app.printTopPopulatedCities(null);
+    }
+    @Test
+    void printTopPopulatedCitiesTestEmpty()
+    {
+        ArrayList<City> city5 = new ArrayList<City>();
+        app.printTopPopulatedCities(city5);
+    }
+    @Test
+    void printTopPopulatedCitiesTestContainsNull()
+    {
+        ArrayList<City> city5 = new ArrayList<City>();
+        city5.add(null);
+        app.printTopPopulatedCities(city5);
+    }
+    @Test
+    void printTopPopulatedCities()
+    {
+        ArrayList<City> city5 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Mumbai (Bombay)";
+        cit.CountryCode = "ARG";
+        cit.District = "Maharashtra";
+        cit.Population = 10500000;
+        city5.add(cit);
+        app.printTopPopulatedCities(city5);
+    }
+
 
 }
