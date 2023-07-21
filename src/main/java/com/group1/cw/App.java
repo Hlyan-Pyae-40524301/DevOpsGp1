@@ -340,7 +340,7 @@ public class App
      */
     public void printCountriesByPopulation(ArrayList<Country> country)
     {
-        // Check employees is not null
+        // Check country is not null
         if (country == null)
         {
             System.out.println("No countries");
@@ -416,7 +416,7 @@ public class App
      */
     public void printCountriesInContinentByPopulation(ArrayList<Country> country1)
     {
-        // Check employees is not null
+        // Check country is not null
         if (country1 == null)
         {
             System.out.println("No countries in continent");
@@ -490,7 +490,7 @@ public class App
      */
     public void printCountriesInRegionByPopulation(ArrayList<Country> country2)
     {
-        // Check employees is not null
+        // Check country is not null
         if (country2 == null)
         {
             System.out.println("No countries in Region");
@@ -564,7 +564,7 @@ public class App
      */
     public void printTopPopulatedCountries(ArrayList<Country> country3)
     {
-        // Check employees is not null
+        // Check country is not null
         if (country3 == null)
         {
             System.out.println("No top populated countries");
@@ -639,7 +639,7 @@ public class App
      */
     public void printTopPopulatedCountriesInContinent(ArrayList<Country> country4)
     {
-        // Check employees is not null
+        // Check country is not null
         if (country4 == null)
         {
             System.out.println("No top populated countries in continent");
@@ -714,7 +714,7 @@ public class App
      */
     public void printTopPopulatedCountriesInRegion(ArrayList<Country> country5)
     {
-        // Check employees is not null
+        // Check country is not null
         if (country5 == null)
         {
             System.out.println("No top populated countries in region");
@@ -788,7 +788,7 @@ public class App
      */
     public void printCitiesByPopulation(ArrayList<City> city)
     {
-        // Check employees is not null
+        // Check city is not null
         if (city == null)
         {
             System.out.println("No cities");
@@ -862,7 +862,7 @@ public class App
      */
     public void printCitiesInContinentByPopulation(ArrayList<City> city1)
     {
-        // Check employees is not null
+        // Check city is not null
         if (city1 == null)
         {
             System.out.println("No cities in continent");
@@ -937,6 +937,13 @@ public class App
      */
     public void printCitiesInRegionByPopulation(ArrayList<City> city2)
     {
+        // Check city is not null
+        if (city2 == null)
+        {
+            System.out.println("No cities in Region");
+            return;
+        }
+
         // Title
         System.out.println("Cities In A Region (Southeast Asia) Report by Highest Population to Lowest");
 
@@ -945,6 +952,8 @@ public class App
         // Loop over all cities in the list
         for (City cit : city2)
         {
+            if (cit == null)
+                continue;
             String cit_string =
                     String.format("%-30s %-30s %-30s %-30s",
                             cit.Name, cit.CountryCode, cit.District, cit.Population);
@@ -1003,6 +1012,13 @@ public class App
      */
     public void printCitiesInCountryByPopulation(ArrayList<City> city3)
     {
+        // Check city is not null
+        if (city3 == null)
+        {
+            System.out.println("No cities in Country");
+            return;
+        }
+
         // Title
         System.out.println("Cities In A Country (Myanmar) Report by Highest Population to Lowest");
 
@@ -1011,6 +1027,8 @@ public class App
         // Loop over all cities in the list
         for (City cit : city3)
         {
+            if (cit == null)
+                continue;
             String cit_string =
                     String.format("%-30s %-30s %-30s %-30s",
                             cit.Name, cit.CountryCode, cit.District, cit.Population);

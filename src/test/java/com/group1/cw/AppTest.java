@@ -246,8 +246,8 @@ public class AppTest
     {
         ArrayList<City> city = new ArrayList<City>();
         City cit = new City();
-        cit.Name = "Mumbai";
-        cit.CountryCode = "3974";
+        cit.Name = "Mumbai (Bombay)";
+        cit.CountryCode = "ARG";
         cit.District = "Maharashtra";
         cit.Population = 10500000;
         city.add(cit);
@@ -278,12 +278,76 @@ public class AppTest
     {
         ArrayList<City> city1 = new ArrayList<City>();
         City cit = new City();
-        cit.Name = "Mumbai";
-        cit.CountryCode = "3974";
+        cit.Name = "Mumbai (Bombay)";
+        cit.CountryCode = "ARG";
         cit.District = "Maharashtra";
         cit.Population = 10500000;
         city1.add(cit);
         app.printCitiesByPopulation(city1);
+    }
+
+    //Testing for Cities In Region Report by Population
+    @Test
+    void printCitiesInRegionTestNull()
+    {
+        app.printCitiesInRegionByPopulation(null);
+    }
+    @Test
+    void printCitiesInRegionTestEmpty()
+    {
+        ArrayList<City> city2 = new ArrayList<City>();
+        app.printCitiesInRegionByPopulation(city2);
+    }
+    @Test
+    void printCitiesInRegionTestContainsNull()
+    {
+        ArrayList<City> city2 = new ArrayList<City>();
+        city2.add(null);
+        app.printCitiesInRegionByPopulation(city2);
+    }
+    @Test
+    void printCitiesInRegion()
+    {
+        ArrayList<City> city2 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Jakarta";
+        cit.CountryCode = "IDN";
+        cit.District = "Jakarta Raya";
+        cit.Population = 9604900;
+        city2.add(cit);
+        app.printCitiesInRegionByPopulation(city2);
+    }
+
+    //Testing for Cities In Country Report by Population
+    @Test
+    void printCitiesInCountryTestNull()
+    {
+        app.printCitiesInCountryByPopulation(null);
+    }
+    @Test
+    void printCitiesInCountryTestEmpty()
+    {
+        ArrayList<City> city3 = new ArrayList<City>();
+        app.printCitiesInCountryByPopulation(city3);
+    }
+    @Test
+    void printCitiesInCountryTestContainsNull()
+    {
+        ArrayList<City> city3 = new ArrayList<City>();
+        city3.add(null);
+        app.printCitiesInCountryByPopulation(city3);
+    }
+    @Test
+    void printCitiesInCountry()
+    {
+        ArrayList<City> city3 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Rangoon (Yangon)";
+        cit.CountryCode = "MMR";
+        cit.District = "Rangoon [Yangon]";
+        cit.Population = 3361700;
+        city3.add(cit);
+        app.printCitiesInCountryByPopulation(city3);
     }
 
 
