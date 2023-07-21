@@ -127,7 +127,7 @@ public class AppTest
         app.printTopPopulatedCountries(null);
     }
     @Test
-    void printCTopPopulatedCountriesTestEmpty()
+    void printTopPopulatedCountriesTestEmpty()
     {
         ArrayList<Country> country3 = new ArrayList<Country>();
         app.printTopPopulatedCountries(country3);
@@ -161,7 +161,7 @@ public class AppTest
         app.printTopPopulatedCountriesInContinent(null);
     }
     @Test
-    void printCTopPopulatedCountriesInContinentTestEmpty()
+    void printTopPopulatedCountriesInContinentTestEmpty()
     {
         ArrayList<Country> country4 = new ArrayList<Country>();
         app.printTopPopulatedCountriesInContinent(country4);
@@ -195,7 +195,7 @@ public class AppTest
         app.printTopPopulatedCountriesInRegion(null);
     }
     @Test
-    void printCTopPopulatedCountriesInRegionTestEmpty()
+    void printTopPopulatedCountriesInRegionTestEmpty()
     {
         ArrayList<Country> country5 = new ArrayList<Country>();
         app.printTopPopulatedCountriesInRegion(country5);
@@ -220,6 +220,38 @@ public class AppTest
         cou.Capital = "3816";
         country5.add(cou);
         app.printTopPopulatedCountriesInRegion(country5);
+    }
+
+    //Testing for Top Populated Countries In Region Report by Population
+    @Test
+    void printCitiesTestNull()
+    {
+        app.printCitiesByPopulation(null);
+    }
+    @Test
+    void printCitiesTestEmpty()
+    {
+        ArrayList<City> city = new ArrayList<City>();
+        app.printCitiesByPopulation(city);
+    }
+    @Test
+    void printCitiesTestContainsNull()
+    {
+        ArrayList<City> city = new ArrayList<City>();
+        city.add(null);
+        app.printCitiesByPopulation(city);
+    }
+    @Test
+    void printCities()
+    {
+        ArrayList<City> city = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Mumbai";
+        cit.CountryCode = "3974";
+        cit.District = "Maharashtra";
+        cit.Population = 10500000;
+        city.add(cit);
+        app.printCitiesByPopulation(city);
     }
 
 
