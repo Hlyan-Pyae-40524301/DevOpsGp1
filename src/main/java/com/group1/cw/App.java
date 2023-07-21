@@ -166,6 +166,14 @@ public class App
         // Print Cities in a Country By Population (city)
         a.printCitiesInCountryByPopulation(city3);
 
+        // Cities in a District
+        // Extract city country information
+        ArrayList<City> city4 = a.getAllCitiesInDistrictByPopulation();
+        // Test the size of the returned data
+        System.out.println(city4.size());
+        // Print Cities in a District By Population (city)
+        a.printCitiesInDistrictByPopulation(city4);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -626,7 +634,7 @@ public class App
 
         // Print header
         System.out.println(String.format("%-10s %-20s %-20s %-30s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
-        // Loop over all countries in the list
+        // Loop over all cities in the list
         for (Country cou : country5)
         {
             String cou_string =
@@ -659,7 +667,7 @@ public class App
                             "ORDER BY city.Population DESC;";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
+            // Extract city information
             ArrayList<City> city = new ArrayList<City>();
             while (rset.next())
             {
@@ -691,7 +699,7 @@ public class App
 
         // Print header
         System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
-        // Loop over all countries in the list
+        // Loop over all cities in the list
         for (City cit : city)
         {
             String cit_string =
@@ -724,7 +732,7 @@ public class App
                             "ORDER BY city.Population DESC;";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
+            // Extract city information
             ArrayList<City> city1 = new ArrayList<City>();
             while (rset.next())
             {
@@ -756,7 +764,7 @@ public class App
 
         // Print header
         System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
-        // Loop over all countries in the list
+        // Loop over all cities in the list
         for (City cit : city1)
         {
             String cit_string =
@@ -790,7 +798,7 @@ public class App
                             "ORDER BY city.Population DESC;";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
+            // Extract city information
             ArrayList<City> city2 = new ArrayList<City>();
             while (rset.next())
             {
@@ -822,7 +830,7 @@ public class App
 
         // Print header
         System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
-        // Loop over all countries in the list
+        // Loop over all cities in the list
         for (City cit : city2)
         {
             String cit_string =
@@ -856,7 +864,7 @@ public class App
                             "ORDER BY city.Population DESC;";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
+            // Extract city information
             ArrayList<City> city3 = new ArrayList<City>();
             while (rset.next())
             {
@@ -888,8 +896,74 @@ public class App
 
         // Print header
         System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
-        // Loop over all countries in the list
+        // Loop over all cities in the list
         for (City cit : city3)
+        {
+            String cit_string =
+                    String.format("%-30s %-30s %-30s %-30s",
+                            cit.Name, cit.CountryCode, cit.District, cit.Population);
+            System.out.println(cit_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /**
+     * Gets all the current City and Country.
+     * @return A list of Mandalay by largest population to smallest, or null if there is an error.
+     */
+    public ArrayList<City> getAllCitiesInDistrictByPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population " +
+                            "FROM city, country " +
+                            "WHERE city.CountryCode = country.Code " +
+                            "AND city.District='Mandalay' " +
+                            "ORDER BY city.Population DESC;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> city4 = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.Name = rset.getString("city.Name");
+                cit.CountryCode = rset.getString("country.Name");
+                cit.District = rset.getString("city.District");
+                cit.Population = rset.getInt("city.Population");
+                city4.add(cit);
+            }
+            return city4;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of country.
+     * @param city4 The list of country to print.
+     */
+    public void printCitiesInDistrictByPopulation(ArrayList<City> city4)
+    {
+        // Title
+        System.out.println("Cities in District (Mandalay) Report by Highest Population to Lowest");
+
+        // Print header
+        System.out.println(String.format("%-30s %-30s %-30s %-30s", "CityName", "CountryName", "District", "Population"));
+        // Loop over all cities in the list
+        for (City cit : city4)
         {
             String cit_string =
                     String.format("%-30s %-30s %-30s %-30s",
