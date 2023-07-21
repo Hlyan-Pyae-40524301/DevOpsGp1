@@ -340,6 +340,13 @@ public class App
      */
     public void printCountriesByPopulation(ArrayList<Country> country)
     {
+        // Check employees is not null
+        if (country == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
+
         // Title
         System.out.println("Country Report by Highest Population to Lowest");
 
@@ -348,6 +355,8 @@ public class App
         // Loop over all countries in the list
         for (Country cou : country)
         {
+            if (cou == null)
+                continue;
             String cou_string =
                     String.format("%-10s %-20s %-20s %-20s %-20s %-20s",
                             cou.Code, cou.Name, cou.Continent, cou.Region, cou.Population, cou.Capital);
