@@ -31,4 +31,15 @@ public class AppIntegrationTest
         assertEquals(cou.Region, "Southeast Asia");
         assertEquals(cou.Population, 45611000);
     }
+
+    @Test
+    void testGetCity()
+    {
+        City cit = app.getCity(2710);
+        assertEquals(cit.ID, 2710);
+        assertEquals(cit.Name, "Rangoon (Yangon)");
+        assertEquals(cit.CountryCode, "MMR");
+        assertEquals(cit.District, "Rangoon [Yangon]");
+        assertEquals(cit.Population, 3361700);
+    }
 }

@@ -289,6 +289,45 @@ public class App
     }
 
     /**
+     * getCity
+     */
+    public City getCity(int ID)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT ID, Name, CountryCode, District, Population "
+                            + "FROM city "
+                            + "WHERE ID = " + ID;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new city if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                City cit = new City();
+                cit.ID = rset.getInt("ID");
+                cit.Name = rset.getString("Name");
+                cit.CountryCode = rset.getString("CountryCode");
+                cit.District = rset.getString("District");
+                cit.Population = rset.getInt("Population");
+                return cit;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    /**
      * Gets all the current Country and City.
      * @return A list of all Countries and Cities by largest population to smallest, or null if there is an error.
      */
