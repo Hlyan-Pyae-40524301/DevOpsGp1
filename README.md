@@ -9,6 +9,8 @@
 
 [![Releases](https://img.shields.io/github/release/Hlyan-Pyae-40524301/DevOpsGp1/all.svg?style=flat-square)](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/releases)
 
+[![codecov](https://codecov.io/gh/Hlyan-Pyae-40524301/DevOpsGp1/branch/feature/code-coverage/graph/badge.svg?token=9AKL48BO18)](https://codecov.io/gh/Hlyan-Pyae-40524301/DevOpsGp1)
+
 Setting up our development environment for the module is the goal of this lab. The majority of the tools we will put up today are among the many that we will use in the module. The systems we'll employ are:
 
 Java
