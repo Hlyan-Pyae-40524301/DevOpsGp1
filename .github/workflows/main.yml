@@ -1,9 +1,6 @@
 name: A workflow for my App
-on:
-  push:
-    branches:
-      - master
-      - feature/integration-testing
+on: push
+
 jobs:
   UnitTests:
     name: Unit Tests
