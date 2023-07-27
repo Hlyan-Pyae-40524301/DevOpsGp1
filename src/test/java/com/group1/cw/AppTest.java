@@ -728,5 +728,39 @@ public class AppTest
         app.printTopPopulatedCapitalCitiesInRegion(city15);
     }
 
+    //Testing for Population Of People In Continent
+    @Test
+    void printPopulationOfPeopleInContinentTestNull()
+    {
+        app.printPopulationOfPeopleInContinent(null);
+    }
+    @Test
+    void printPopulationOfPeopleInContinentTestEmpty()
+    {
+        ArrayList<Country> country6 = new ArrayList<Country>();
+        app.printPopulationOfPeopleInContinent(country6);
+    }
+    @Test
+    void printPopulationOfPeopleInContinentTestContainsNull()
+    {
+        ArrayList<Country> country6 = new ArrayList<Country>();
+        country6.add(null);
+        app.printPopulationOfPeopleInContinent(country6);
+    }
+    @Test
+    void printPopulationOfPeopleInContinent()
+    {
+        ArrayList<Country> country6 = new ArrayList<Country>();
+        Country cou = new Country();
+        cou.Continent = "North America";
+        cou.TotalPopulation = 482993000;
+        cou.PeopleLivingInCities = 168250381;
+        cou.PercentagePeopleLivingInCities = (float) 34.835;
+        cou.PeopleNotLivingInCities = 314742619;
+        cou.PercentagePeopleNotLivingInCities = (float) 65.165;
+        country6.add(cou);
+        app.printPopulationOfPeopleInContinent(country6);
+    }
+
 
 }
