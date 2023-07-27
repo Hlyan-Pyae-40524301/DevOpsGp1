@@ -247,4 +247,14 @@ public class AppIntegrationTest
         assertEquals(cit.get(0).CountryCode, "South Korea");
         assertEquals(cit.get(0).Population, 9981619);
     }
+
+    //Testing for Top Populated Capital Cities In Continent Report by Population
+    @Test
+    void getTopPopulatedCapitalCitiesInContinent()
+    {
+        ArrayList<City> cit = app.getTopPopulatedCapitalCitiesInContinent();
+        assertEquals(cit.get(0).Name, "Seoul");
+        assertEquals(cit.get(0).CountryCode, "South Korea");
+        assertEquals(cit.get(0).Population, 9981619);
+    }
 }
