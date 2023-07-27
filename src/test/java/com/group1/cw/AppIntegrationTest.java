@@ -227,4 +227,14 @@ public class AppIntegrationTest
         assertEquals(cit.get(0).CountryCode, "South Korea");
         assertEquals(cit.get(0).Population, 9981619);
     }
+
+    //Testing for Capital Cities In Region Report by Population
+    @Test
+    void getAllCapitalCitiesInRegionByPopulation()
+    {
+        ArrayList<City> cit = app.getAllCapitalCitiesInRegionByPopulation();
+        assertEquals(cit.get(0).Name, "Jakarta");
+        assertEquals(cit.get(0).CountryCode, "Indonesia");
+        assertEquals(cit.get(0).Population, 9604900);
+    }
 }
