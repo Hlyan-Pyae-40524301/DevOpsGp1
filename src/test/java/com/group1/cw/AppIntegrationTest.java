@@ -47,4 +47,18 @@ public class AppIntegrationTest
         assertEquals(cou.get(0).Region, "Eastern Asia");
         assertEquals(cou.get(0).Population, 1277558000);
     }
+
+    // Integration Testing for Countries In Region Report by Population
+    @Test
+    void getAllCountryInRegionByPopulation()
+    {
+        ArrayList<Country> cou = new ArrayList<>();
+        cou = app.getAllCountryInRegionByPopulation();
+        assertEquals(cou.get(0).Capital, "Brasília");
+        assertEquals(cou.get(0).Code, "BRA");
+        assertEquals(cou.get(0).Name, "Brazil");
+        assertEquals(cou.get(0).Continent, "South America");
+        assertEquals(cou.get(0).Region, "South America");
+        assertEquals(cou.get(0).Population, 170115000);
+    }
 }

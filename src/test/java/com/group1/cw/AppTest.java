@@ -86,7 +86,7 @@ public class AppTest
         app.printCountriesInContinentByPopulation(country1);
     }
 
-    //Testing for Top Populated Countries Report by Population
+    //Testing for Countries In Region Report by Population
     @Test
     void printCountriesInRegionTestNull()
     {
