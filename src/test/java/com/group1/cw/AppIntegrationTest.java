@@ -150,4 +150,15 @@ public class AppIntegrationTest
         assertEquals(cit.get(0).District, "Maharashtra");
         assertEquals(cit.get(0).Population, 10500000);
     }
+
+    //Testing for Top Populated Cities In Continent Report by Population
+    @Test
+    void getTopPopulatedCitiesInContinent()
+    {
+        ArrayList<City> cit = app.getTopPopulatedCitiesInContinent();
+        assertEquals(cit.get(0).Name, "Mumbai (Bombay)");
+        assertEquals(cit.get(0).CountryCode, "India");
+        assertEquals(cit.get(0).District, "Maharashtra");
+        assertEquals(cit.get(0).Population, 10500000);
+    }
 }
