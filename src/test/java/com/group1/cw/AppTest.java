@@ -604,5 +604,36 @@ public class AppTest
         app.printAllCapitalCitiesInContinentByPopulation(city11);
     }
 
+    //Testing for Capital Cities In Region Report by Population
+    @Test
+    void printCapitalCitiesInRegionTestNull()
+    {
+        app.printAllCapitalCitiesInRegionByPopulation(null);
+    }
+    @Test
+    void printCapitalCitiesInRegionTestEmpty()
+    {
+        ArrayList<City> city12 = new ArrayList<City>();
+        app.printAllCapitalCitiesInRegionByPopulation(city12);
+    }
+    @Test
+    void printCapitalCitiesInRegionTestContainsNull()
+    {
+        ArrayList<City> city12 = new ArrayList<City>();
+        city12.add(null);
+        app.printAllCapitalCitiesInRegionByPopulation(city12);
+    }
+    @Test
+    void printCapitalCitiesInRegion()
+    {
+        ArrayList<City> city12 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Jakarta";
+        cit.CountryCode = "Indonesia";
+        cit.Population = 9604900;
+        city12.add(cit);
+        app.printAllCapitalCitiesInRegionByPopulation(city12);
+    }
+
 
 }
