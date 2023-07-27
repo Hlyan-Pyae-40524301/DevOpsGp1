@@ -2,7 +2,7 @@ package com.group1.cw;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+//import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
 
@@ -24,8 +24,7 @@ public class AppIntegrationTest
     @Test
     void getAllCountryByPopulation()
     {
-        ArrayList<Country> cou = new ArrayList<>();
-                cou = app.getAllCountryByPopulation();
+        ArrayList<Country> cou = app.getAllCountryByPopulation();
         assertEquals(cou.get(0).Capital, "Peking");
         assertEquals(cou.get(0).Code, "CHN");
         assertEquals(cou.get(0).Name, "China");
@@ -38,8 +37,7 @@ public class AppIntegrationTest
     @Test
     void getAllCountryInContinentByPopulation()
     {
-        ArrayList<Country> cou = new ArrayList<>();
-        cou = app.getAllCountryInContinentByPopulation();
+        ArrayList<Country> cou = app.getAllCountryInContinentByPopulation();
         assertEquals(cou.get(0).Capital, "Peking");
         assertEquals(cou.get(0).Code, "CHN");
         assertEquals(cou.get(0).Name, "China");
@@ -52,8 +50,7 @@ public class AppIntegrationTest
     @Test
     void getAllCountryInRegionByPopulation()
     {
-        ArrayList<Country> cou = new ArrayList<>();
-        cou = app.getAllCountryInRegionByPopulation();
+        ArrayList<Country> cou = app.getAllCountryInRegionByPopulation();
         assertEquals(cou.get(0).Capital, "Brasília");
         assertEquals(cou.get(0).Code, "BRA");
         assertEquals(cou.get(0).Name, "Brazil");
@@ -66,8 +63,7 @@ public class AppIntegrationTest
     @Test
     void getTopPopulatedCountries()
     {
-        ArrayList<Country> cou = new ArrayList<>();
-        cou = app.getTopPopulatedCountries();
+        ArrayList<Country> cou = app.getTopPopulatedCountries();
         assertEquals(cou.get(0).Capital, "Peking");
         assertEquals(cou.get(0).Code, "CHN");
         assertEquals(cou.get(0).Name, "China");
@@ -80,13 +76,23 @@ public class AppIntegrationTest
     @Test
     void getTopPopulatedCountriesInRegion()
     {
-        ArrayList<Country> cou = new ArrayList<>();
-        cou = app.getTopPopulatedCountriesInRegion();
+        ArrayList<Country> cou = app.getTopPopulatedCountriesInRegion();
         assertEquals(cou.get(0).Capital, "Washington");
         assertEquals(cou.get(0).Code, "USA");
         assertEquals(cou.get(0).Name, "United States");
         assertEquals(cou.get(0).Continent, "North America");
         assertEquals(cou.get(0).Region, "North America");
         assertEquals(cou.get(0).Population, 278357000);
+    }
+
+    // Integration Testing for Cities Report by Population
+    @Test
+    void getAllCitiesByPopulation()
+    {
+        ArrayList<City> cit = app.getAllCitiesByPopulation();
+        assertEquals(cit.get(0).Name, "Mumbai (Bombay)");
+        assertEquals(cit.get(0).CountryCode, "India");
+        assertEquals(cit.get(0).District, "Maharashtra");
+        assertEquals(cit.get(0).Population, 10500000);
     }
 }
