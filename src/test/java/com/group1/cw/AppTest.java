@@ -690,11 +690,42 @@ public class AppTest
     {
         ArrayList<City> city14 = new ArrayList<City>();
         City cit = new City();
+        cit.Name = "Seoul";
+        cit.CountryCode = "South Korea";
+        cit.Population = 9981619;
+        city14.add(cit);
+        app.printTopPopulatedCapitalCitiesInContinent(city14);
+    }
+
+    //Testing for Top Populated Capital Cities In Region Report by Population
+    @Test
+    void printTopPopulatedCapitalCitiesInRegionTestNull()
+    {
+        app.printTopPopulatedCapitalCitiesInRegion(null);
+    }
+    @Test
+    void printTopPopulatedCapitalCitiesInRegionTestEmpty()
+    {
+        ArrayList<City> city15 = new ArrayList<City>();
+        app.printTopPopulatedCapitalCitiesInRegion(city15);
+    }
+    @Test
+    void printTopPopulatedCapitalCitiesInRegionTestContainsNull()
+    {
+        ArrayList<City> city15 = new ArrayList<City>();
+        city15.add(null);
+        app.printTopPopulatedCapitalCitiesInRegion(city15);
+    }
+    @Test
+    void printTopPopulatedCapitalCitiesInRegion()
+    {
+        ArrayList<City> city15 = new ArrayList<City>();
+        City cit = new City();
         cit.Name = "Jakarta";
         cit.CountryCode = "Indonesia";
         cit.Population = 9604900;
-        city14.add(cit);
-        app.printTopPopulatedCapitalCities(city14);
+        city15.add(cit);
+        app.printTopPopulatedCapitalCitiesInRegion(city15);
     }
 
 
