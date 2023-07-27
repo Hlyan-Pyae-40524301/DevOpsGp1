@@ -222,8 +222,16 @@ public class App
         ArrayList<City> city11 = a.getAllCapitalCitiesInContinentByPopulation();
         // Test the size of the returned data
         System.out.println(city11.size());
-        // Print Capital City By Population (city)
+        // Print Capital City In Continent By Population (city)
         a.printAllCapitalCitiesInContinentByPopulation(city11);
+
+        // Capital city In Region
+        // Extract city country information
+        ArrayList<City> city12 = a.getAllCapitalCitiesInRegionByPopulation();
+        // Test the size of the returned data
+        System.out.println(city12.size());
+        // Print Capital City In Region By Population (city)
+        a.printAllCapitalCitiesInRegionByPopulation(city12);
 
         // Disconnect from database
         a.disconnect();
@@ -1571,7 +1579,7 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
+            System.out.println("Failed to capital get city details");
             return null;
         }
     }
@@ -1644,7 +1652,7 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
+            System.out.println("Failed to get capital city details");
             return null;
         }
     }
@@ -1669,6 +1677,79 @@ public class App
         System.out.println(String.format("%-30s %-30s %-30s", "CityName", "CountryName", "Population"));
         // Loop over capital cities in the list
         for (City cit : city11)
+        {
+            if (cit == null)
+                continue;
+            String cit_string =
+                    String.format("%-30s %-30s %-30s",
+                            cit.Name, cit.CountryCode, cit.Population);
+            System.out.println(cit_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /** Gets the current City and Country.
+     * @return A list of All Capital Cities In Region by largest population to smallest, or null if there is an error.
+     */
+    public ArrayList<City> getAllCapitalCitiesInRegionByPopulation()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.Population " +
+                            "FROM city, country " +
+                            "WHERE city.ID = country.Capital " +
+                            "AND country.Region='Southeast Asia' " +
+                            "ORDER BY city.Population DESC;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Capital City information
+            ArrayList<City> city12 = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.Name = rset.getString("city.Name");
+                cit.CountryCode = rset.getString("country.Name");
+                cit.Population = rset.getInt("city.Population");
+                city12.add(cit);
+            }
+            return city12;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of Capital Cities.
+     * @param city12 The list of city to print.
+     */
+    public void printAllCapitalCitiesInRegionByPopulation(ArrayList<City> city12)
+    {
+        // Check city is not null
+        if (city12 == null)
+        {
+            System.out.println("No Capital Cities In Region");
+            return;
+        }
+
+        // Title
+        System.out.println("Capital City In Region (Southeast Asia) Report by Highest Population to Lowest");
+
+        // Print header
+        System.out.println(String.format("%-30s %-30s %-30s", "CityName", "CountryName", "Population"));
+        // Loop over capital cities in the list
+        for (City cit : city12)
         {
             if (cit == null)
                 continue;
