@@ -666,5 +666,36 @@ public class AppTest
         app.printTopPopulatedCapitalCities(city13);
     }
 
+    //Testing for Top Populated Capital Cities In Continent Report by Population
+    @Test
+    void printTopPopulatedCapitalCitiesInContinentTestNull()
+    {
+        app.printTopPopulatedCapitalCitiesInContinent(null);
+    }
+    @Test
+    void printTopPopulatedCapitalCitiesInContinentTestEmpty()
+    {
+        ArrayList<City> city14 = new ArrayList<City>();
+        app.printTopPopulatedCapitalCitiesInContinent(city14);
+    }
+    @Test
+    void printTopPopulatedCapitalCitiesInContinentTestContainsNull()
+    {
+        ArrayList<City> city14 = new ArrayList<City>();
+        city14.add(null);
+        app.printTopPopulatedCapitalCitiesInContinent(city14);
+    }
+    @Test
+    void printTopPopulatedCapitalCitiesInContinent()
+    {
+        ArrayList<City> city14 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Jakarta";
+        cit.CountryCode = "Indonesia";
+        cit.Population = 9604900;
+        city14.add(cit);
+        app.printTopPopulatedCapitalCities(city14);
+    }
+
 
 }
