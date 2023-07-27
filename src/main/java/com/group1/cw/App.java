@@ -241,6 +241,14 @@ public class App
         // Print Top Populated Capital Cities By Population (city)
         a.printTopPopulatedCapitalCities(city13);
 
+        // Capital city In Region
+        // Extract city country information
+        ArrayList<City> city14 = a.getTopPopulatedCapitalCitiesInContinent();
+        // Test the size of the returned data
+        System.out.println(city14.size());
+        // Print Top Populated Capital Cities In Continent By Population (city)
+        a.printTopPopulatedCapitalCitiesInContinent(city14);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -1831,6 +1839,80 @@ public class App
         System.out.println(String.format("%-30s %-30s %-30s", "CityName", "CountryName", "Population"));
         // Loop over capital cities in the list
         for (City cit : city13)
+        {
+            if (cit == null)
+                continue;
+            String cit_string =
+                    String.format("%-30s %-30s %-30s",
+                            cit.Name, cit.CountryCode, cit.Population);
+            System.out.println(cit_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /** Gets the current City and Country.
+     * @return A list of Top Populated Capital Cities In Continent by largest population to smallest, or null if there is an error.
+     */
+    public ArrayList<City> getTopPopulatedCapitalCitiesInContinent()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.Population " +
+                            "FROM city, country " +
+                            "WHERE city.ID = country.Capital " +
+                            "AND country.Continent='Asia' " +
+                            "ORDER BY city.Population " +
+                            "DESC LIMIT 10;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Capital City information
+            ArrayList<City> city14 = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.Name = rset.getString("city.Name");
+                cit.CountryCode = rset.getString("country.Name");
+                cit.Population = rset.getInt("city.Population");
+                city14.add(cit);
+            }
+            return city14;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of Capital Cities.
+     * @param city14 The list of city to print.
+     */
+    public void printTopPopulatedCapitalCitiesInContinent(ArrayList<City> city14)
+    {
+        // Check city is not null
+        if (city14 == null)
+        {
+            System.out.println("No Top Populated Capital Cities In Continent");
+            return;
+        }
+
+        // Title
+        System.out.println("Top Populated Capital City In Continent (Asia) Report by Highest Population to Lowest");
+
+        // Print header
+        System.out.println(String.format("%-30s %-30s %-30s", "CityName", "CountryName", "Population"));
+        // Loop over capital cities in the list
+        for (City cit : city14)
         {
             if (cit == null)
                 continue;
