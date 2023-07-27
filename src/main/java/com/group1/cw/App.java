@@ -257,6 +257,14 @@ public class App
         // Print Top Populated Capital Cities In Region By Population (city)
         a.printTopPopulatedCapitalCitiesInRegion(city15);
 
+        // Population Of People
+        // Extract population information
+        ArrayList<Country> country6 = a.getPopulationOfPeople();
+        // Test the size of the returned data
+        System.out.println(country6.size());
+        // Print Population Of People (country)
+        a.printPopulationOfPeople(country6);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -2001,6 +2009,88 @@ public class App
             String cit_string =
                     String.format("%-30s %-30s %-30s",
                             cit.Name, cit.CountryCode, cit.Population);
+            System.out.println(cit_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /** Gets the current City and Country.
+     * @return A list of population of people, people living in cities, and people not living in cities in each continent, or null if there is an error.
+     */
+    public ArrayList<Country> getPopulationOfPeople()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Continent, " +
+                            "SUM(country.Population) AS total_population, " +
+                            "SUM(coalesce(city.Population, 0)) AS people_living_in_cities, " +
+                            "(SUM(coalesce(city.Population, 0)) / SUM(country.Population)) * 100 AS percentage_people_living_in_cities, " +
+                            "SUM(country.Population - coalesce(city.Population, 0)) AS people_not_living_in_cities, " +
+                            "((SUM(country.Population) - SUM(coalesce(city.Population, 0))) / SUM(country.Population)) * 100 AS percentage_people_not_living_in_cities " +
+                            "FROM country " +
+                            "LEFT JOIN (SELECT CountryCode, SUM(Population) AS Population " +
+                            "FROM city GROUP BY CountryCode) city " +
+                            "ON country.Code = city.CountryCode " +
+                            "GROUP BY country.Continent; ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Country information
+            ArrayList<Country> country6 = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country cou = new Country();
+                cou.Continent = rset.getString("country.Continent");
+                cou.TotalPopulation = rset.getLong("total_population");
+                cou.PeopleLivingInCities = rset.getLong("people_living_in_cities");
+                cou.PercentagePeopleLivingInCities = rset.getFloat("percentage_people_living_in_cities");
+                cou.PeopleNotLivingInCities = rset.getLong("people_not_living_in_cities");
+                cou.PercentagePeopleNotLivingInCities = rset.getFloat("percentage_people_not_living_in_cities");
+                country6.add(cou);
+            }
+            return country6;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of Capital Cities.
+     * @param country6 The list of city to print.
+     */
+    public void printPopulationOfPeople(ArrayList<Country> country6)
+    {
+        // Check city is not null
+        if (country6 == null)
+        {
+            System.out.println("No Population Of People");
+            return;
+        }
+
+        // Title
+        System.out.println("Population Of People Report");
+
+        // Print header
+        System.out.println(String.format("%-20s %-20s %-20s %-20s %-20s %-20s", "ContinentName", "TotalPopulation", "PeopleInCity", "PeopleInCity(%)", "PeopleNotInCity", "PeopleNotInCity(%)"));
+        // Loop over capital cities in the list
+        for (Country cou : country6)
+        {
+            if (cou == null)
+                continue;
+            String cit_string =
+                    String.format("%-20s %-20s %-20s %-20s %-20s %-20s",
+                            cou.Continent, cou.TotalPopulation, cou.PeopleLivingInCities, cou.PercentagePeopleLivingInCities+"%", cou.PeopleNotLivingInCities, cou.PercentagePeopleNotLivingInCities+"%");
             System.out.println(cit_string);
         }
         System.out.println();
