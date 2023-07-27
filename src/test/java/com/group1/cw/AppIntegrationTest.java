@@ -106,4 +106,15 @@ public class AppIntegrationTest
         assertEquals(cit.get(0).District, "Maharashtra");
         assertEquals(cit.get(0).Population, 10500000);
     }
+
+    // Integration Testing for Cities In Region Report by Population
+    @Test
+    void getAllCitiesInRegionByPopulation()
+    {
+        ArrayList<City> cit = app.getAllCitiesInRegionByPopulation();
+        assertEquals(cit.get(0).Name, "Jakarta");
+        assertEquals(cit.get(0).CountryCode, "Indonesia");
+        assertEquals(cit.get(0).District, "Jakarta Raya");
+        assertEquals(cit.get(0).Population, 9604900);
+    }
 }
