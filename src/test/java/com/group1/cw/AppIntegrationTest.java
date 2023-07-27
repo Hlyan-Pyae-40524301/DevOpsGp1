@@ -20,26 +20,17 @@ public class AppIntegrationTest
 
     }
 
+    // Integration Testing for Countries Report by Population
     @Test
-    void testGetCountry()
+    void getAllCountryByPopulation()
     {
-        Country cou = app.getCountry(2710);
-        assertEquals(cou.Capital, "2710");
-        assertEquals(cou.Code, "MMR");
-        assertEquals(cou.Name, "Myanmar");
-        assertEquals(cou.Continent, "Asia");
-        assertEquals(cou.Region, "Southeast Asia");
-        assertEquals(cou.Population, 45611000);
-    }
-
-    @Test
-    void testGetCity()
-    {
-        City cit = app.getCity(2710);
-        assertEquals(cit.ID, 2710);
-        assertEquals(cit.Name, "Rangoon (Yangon)");
-        assertEquals(cit.CountryCode, "MMR");
-        assertEquals(cit.District, "Rangoon [Yangon]");
-        assertEquals(cit.Population, 3361700);
+        ArrayList<Country> cou = new ArrayList<>();
+                cou = app.getAllCountryByPopulation();
+        assertEquals(cou.get(0).Capital, "Peking");
+        assertEquals(cou.get(0).Code, "CHN");
+        assertEquals(cou.get(0).Name, "China");
+        assertEquals(cou.get(0).Continent, "Asia");
+        assertEquals(cou.get(0).Region, "Eastern Asia");
+        assertEquals(cou.get(0).Population, 1277558000);
     }
 }

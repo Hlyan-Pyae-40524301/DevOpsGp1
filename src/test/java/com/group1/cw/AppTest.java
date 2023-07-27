@@ -217,7 +217,7 @@ public class AppTest
         cou.Continent = "North America";
         cou.Region = "North America";
         cou.Population = 278357000;
-        cou.Capital = "3816";
+        cou.Capital = "3813";
         country5.add(cou);
         app.printTopPopulatedCountriesInRegion(country5);
     }
@@ -247,7 +247,7 @@ public class AppTest
         ArrayList<City> city = new ArrayList<City>();
         City cit = new City();
         cit.Name = "Mumbai (Bombay)";
-        cit.CountryCode = "ARG";
+        cit.CountryCode = "IND";
         cit.District = "Maharashtra";
         cit.Population = 10500000;
         city.add(cit);
@@ -279,7 +279,7 @@ public class AppTest
         ArrayList<City> city1 = new ArrayList<City>();
         City cit = new City();
         cit.Name = "Mumbai (Bombay)";
-        cit.CountryCode = "ARG";
+        cit.CountryCode = "IND";
         cit.District = "Maharashtra";
         cit.Population = 10500000;
         city1.add(cit);
@@ -407,7 +407,7 @@ public class AppTest
         ArrayList<City> city5 = new ArrayList<City>();
         City cit = new City();
         cit.Name = "Mumbai (Bombay)";
-        cit.CountryCode = "ARG";
+        cit.CountryCode = "IND";
         cit.District = "Maharashtra";
         cit.Population = 10500000;
         city5.add(cit);
@@ -439,7 +439,7 @@ public class AppTest
         ArrayList<City> city6 = new ArrayList<City>();
         City cit = new City();
         cit.Name = "Mumbai (Bombay)";
-        cit.CountryCode = "ARG";
+        cit.CountryCode = "IND";
         cit.District = "Maharashtra";
         cit.Population = 10500000;
         city6.add(cit);
