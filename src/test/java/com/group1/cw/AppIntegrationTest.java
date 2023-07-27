@@ -267,4 +267,17 @@ public class AppIntegrationTest
         assertEquals(cit.get(0).CountryCode, "Indonesia");
         assertEquals(cit.get(0).Population, 9604900);
     }
+
+    //Testing for Population Of People In Continent Report
+    @Test
+    void getPopulationOfPeopleInContinent()
+    {
+        ArrayList<Country> cou = app.getPopulationOfPeopleInContinent();
+        assertEquals(cou.get(0).Continent, "North America");
+        assertEquals(cou.get(0).TotalPopulation, 482993000);
+        assertEquals(cou.get(0).PeopleLivingInCities, 168250381);
+        assertEquals(cou.get(0).PercentagePeopleLivingInCities, (float) 34.835);
+        assertEquals(cou.get(0).PeopleNotLivingInCities, 314742619);
+        assertEquals(cou.get(0).PercentagePeopleNotLivingInCities, (float) 65.165);
+    }
 }
