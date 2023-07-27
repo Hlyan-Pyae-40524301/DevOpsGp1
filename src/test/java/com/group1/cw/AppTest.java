@@ -573,5 +573,36 @@ public class AppTest
         app.printAllCapitalCitiesByPopulation(city10);
     }
 
+    //Testing for Capital Cities In Continent Report by Population
+    @Test
+    void printCapitalCitiesInContinentTestNull()
+    {
+        app.printAllCapitalCitiesInContinentByPopulation(null);
+    }
+    @Test
+    void printCapitalCitiesInContinentTestEmpty()
+    {
+        ArrayList<City> city11 = new ArrayList<City>();
+        app.printAllCapitalCitiesInContinentByPopulation(city11);
+    }
+    @Test
+    void printCapitalCitiesInContinentTestContainsNull()
+    {
+        ArrayList<City> city11 = new ArrayList<City>();
+        city11.add(null);
+        app.printAllCapitalCitiesInContinentByPopulation(city11);
+    }
+    @Test
+    void printCapitalCitiesInContinent()
+    {
+        ArrayList<City> city11 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Seoul";
+        cit.CountryCode = "South Korea";
+        cit.Population = 9981619;
+        city11.add(cit);
+        app.printAllCapitalCitiesInContinentByPopulation(city11);
+    }
+
 
 }
