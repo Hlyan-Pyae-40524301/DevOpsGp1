@@ -1,6 +1,9 @@
 name: A workflow for my App
-on: push
-
+on:
+  push:
+    branches:
+      - master
+      - feature/integration-testing
 jobs:
   UnitTests:
     name: Unit Tests
@@ -17,13 +20,6 @@ jobs:
           distribution: 'adopt'
       - name: Unit Tests
         run: mvn -Dtest=com.group1.cw.AppTest test
-      - name: CodeCov
-        uses: codecov/codecov-action@v2
-        with:
-          # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          directory: ./target/site/jacoco
-          flags: UnitTests # optional
-          verbose: true # optional (default = false)
 
   IntegrationTests:
     name: Integration Tests
@@ -51,7 +47,7 @@ jobs:
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           directory: ./target/site/jacoco
-          flags: IntegrationTests # optional
+          flags: Integration Tests # optional
           verbose: true # optional (default = false)
 
   build:

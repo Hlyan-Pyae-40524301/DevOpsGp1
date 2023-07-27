@@ -79,4 +79,29 @@ public class Country
      * Country's Code2
      */
     public String Code2;
+
+    /**
+     * Total Population
+     */
+    public long TotalPopulation;
+
+    /**
+     * People living in cities
+     */
+    public long PeopleLivingInCities;
+
+    /**
+     * Percentage People living in cities
+     */
+    public float PercentagePeopleLivingInCities;
+
+    /**
+     * People not living in cities
+     */
+    public long PeopleNotLivingInCities;
+
+    /**
+     * Percentage People Not living in cities
+     */
+    public float PercentagePeopleNotLivingInCities;
 }
