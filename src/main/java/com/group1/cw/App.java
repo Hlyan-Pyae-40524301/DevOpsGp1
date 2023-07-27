@@ -213,119 +213,119 @@ public class App
         a.disconnect();
     }
 
-    /**
-     * getCountry
-     */
-    public Country getCountry(int Capital)
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
-                            + "FROM country "
-                            + "WHERE Capital = " + Capital;
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new country if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                Country cou = new Country();
-                cou.Code = rset.getString("Code");
-                cou.Name = rset.getString("Name");
-                cou.Continent = rset.getString("Continent");
-                cou.Region = rset.getString("Region");
-                cou.SurfaceArea = rset.getInt("SurfaceArea");
-                cou.IndepYear = rset.getInt("IndepYear");
-                cou.Population = rset.getInt("Population");
-                cou.LifeExpectancy = rset.getInt("LifeExpectancy");
-                cou.GNP = rset.getInt("GNP");
-                cou.GNPOld = rset.getInt("GNPOld");
-                cou.LocalName = rset.getString("LocalName");
-                cou.GovernmentForm = rset.getString("GovernmentForm");
-                cou.HeadOfState = rset.getString("HeadOfState");
-                cou.Capital = rset.getString("Capital");
-                cou.Code2 = rset.getString("Code2");
-                return cou;
-            }
-            else
-                return null;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
-            return null;
-        }
-    }
-
-    /**
-     * Display Country
-     */
-    public void displayCountry(Country cou)
-    {
-        if (cou != null)
-        {
-            System.out.println(
-                    cou.Code + " "
-                            + cou.Name + "\n"
-                            + "Continent: " + cou.Continent + "\n"
-                            + "Region: " + cou.Region + "\n"
-                            + "SurfaceArea: " + cou.SurfaceArea + "\n"
-                            + "IndepYear: " + cou.IndepYear + "\n"
-                            + "Population: " + cou.Population + "\n"
-                            + "LifeExpectancy: " + cou.LifeExpectancy + "\n"
-                            + "GNP: " + cou.GNP + "\n"
-                            + "GNPOld: " + cou.GNPOld + "\n"
-                            + "LocalName: " + cou.LocalName + "\n"
-                            + "GovernmentForm: " + cou.GovernmentForm + "\n"
-                            + "HeadOfState: " + cou.HeadOfState + "\n"
-                            + "Capital: " + cou.Capital + "\n"
-                            + "Code2: " + cou.Code2 + "\n");
-        }
-    }
-
-    /**
-     * getCity
-     */
-    public City getCity(int ID)
-    {
-        try
-        {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT ID, Name, CountryCode, District, Population "
-                            + "FROM city "
-                            + "WHERE ID = " + ID;
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new city if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                City cit = new City();
-                cit.ID = rset.getInt("ID");
-                cit.Name = rset.getString("Name");
-                cit.CountryCode = rset.getString("CountryCode");
-                cit.District = rset.getString("District");
-                cit.Population = rset.getInt("Population");
-                return cit;
-            }
-            else
-                return null;
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
-            return null;
-        }
-    }
+//    /**
+//     * getCountry
+//     */
+//    public Country getCountry(int Capital)
+//    {
+//        try
+//        {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2 "
+//                            + "FROM country "
+//                            + "WHERE Capital = " + Capital;
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            // Return new country if valid.
+//            // Check one is returned
+//            if (rset.next())
+//            {
+//                Country cou = new Country();
+//                cou.Code = rset.getString("Code");
+//                cou.Name = rset.getString("Name");
+//                cou.Continent = rset.getString("Continent");
+//                cou.Region = rset.getString("Region");
+//                cou.SurfaceArea = rset.getInt("SurfaceArea");
+//                cou.IndepYear = rset.getInt("IndepYear");
+//                cou.Population = rset.getInt("Population");
+//                cou.LifeExpectancy = rset.getInt("LifeExpectancy");
+//                cou.GNP = rset.getInt("GNP");
+//                cou.GNPOld = rset.getInt("GNPOld");
+//                cou.LocalName = rset.getString("LocalName");
+//                cou.GovernmentForm = rset.getString("GovernmentForm");
+//                cou.HeadOfState = rset.getString("HeadOfState");
+//                cou.Capital = rset.getString("Capital");
+//                cou.Code2 = rset.getString("Code2");
+//                return cou;
+//            }
+//            else
+//                return null;
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get country details");
+//            return null;
+//        }
+//    }
+//
+//    /**
+//     * Display Country
+//     */
+//    public void displayCountry(Country cou)
+//    {
+//        if (cou != null)
+//        {
+//            System.out.println(
+//                    cou.Code + " "
+//                            + cou.Name + "\n"
+//                            + "Continent: " + cou.Continent + "\n"
+//                            + "Region: " + cou.Region + "\n"
+//                            + "SurfaceArea: " + cou.SurfaceArea + "\n"
+//                            + "IndepYear: " + cou.IndepYear + "\n"
+//                            + "Population: " + cou.Population + "\n"
+//                            + "LifeExpectancy: " + cou.LifeExpectancy + "\n"
+//                            + "GNP: " + cou.GNP + "\n"
+//                            + "GNPOld: " + cou.GNPOld + "\n"
+//                            + "LocalName: " + cou.LocalName + "\n"
+//                            + "GovernmentForm: " + cou.GovernmentForm + "\n"
+//                            + "HeadOfState: " + cou.HeadOfState + "\n"
+//                            + "Capital: " + cou.Capital + "\n"
+//                            + "Code2: " + cou.Code2 + "\n");
+//        }
+//    }
+//
+//    /**
+//     * getCity
+//     */
+//    public City getCity(int ID)
+//    {
+//        try
+//        {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "SELECT ID, Name, CountryCode, District, Population "
+//                            + "FROM city "
+//                            + "WHERE ID = " + ID;
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            // Return new city if valid.
+//            // Check one is returned
+//            if (rset.next())
+//            {
+//                City cit = new City();
+//                cit.ID = rset.getInt("ID");
+//                cit.Name = rset.getString("Name");
+//                cit.CountryCode = rset.getString("CountryCode");
+//                cit.District = rset.getString("District");
+//                cit.Population = rset.getInt("Population");
+//                return cit;
+//            }
+//            else
+//                return null;
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get city details");
+//            return null;
+//        }
+//    }
 
     /**
      * Gets all the current Country and City.
