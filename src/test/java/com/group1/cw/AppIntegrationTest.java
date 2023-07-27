@@ -128,4 +128,15 @@ public class AppIntegrationTest
         assertEquals(cit.get(0).District, "Rangoon [Yangon]");
         assertEquals(cit.get(0).Population, 3361700);
     }
+
+    //Testing for Cities In District Report by Population
+    @Test
+    void getAllCitiesInDistrictByPopulation()
+    {
+        ArrayList<City> cit = app.getAllCitiesInDistrictByPopulation();
+        assertEquals(cit.get(0).Name, "Mandalay");
+        assertEquals(cit.get(0).CountryCode, "Myanmar");
+        assertEquals(cit.get(0).District, "Mandalay");
+        assertEquals(cit.get(0).Population, 885300);
+    }
 }
