@@ -207,4 +207,14 @@ public class AppIntegrationTest
         assertEquals(cit.get(0).District, "New York");
         assertEquals(cit.get(0).Population, 8008278);
     }
+
+    //Testing for Capital Cities Report by Population
+    @Test
+    void getAllCapitalCitiesByPopulation()
+    {
+        ArrayList<City> cit = app.getAllCapitalCitiesByPopulation();
+        assertEquals(cit.get(0).Name, "Seoul");
+        assertEquals(cit.get(0).CountryCode, "South Korea");
+        assertEquals(cit.get(0).Population, 9981619);
+    }
 }
