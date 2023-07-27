@@ -61,4 +61,18 @@ public class AppIntegrationTest
         assertEquals(cou.get(0).Region, "South America");
         assertEquals(cou.get(0).Population, 170115000);
     }
+
+    // Integration Testing for Top Populated Countries Report by Population
+    @Test
+    void getTopPopulatedCountries()
+    {
+        ArrayList<Country> cou = new ArrayList<>();
+        cou = app.getTopPopulatedCountries();
+        assertEquals(cou.get(0).Capital, "Peking");
+        assertEquals(cou.get(0).Code, "CHN");
+        assertEquals(cou.get(0).Name, "China");
+        assertEquals(cou.get(0).Continent, "Asia");
+        assertEquals(cou.get(0).Region, "Eastern Asia");
+        assertEquals(cou.get(0).Population, 1277558000);
+    }
 }
