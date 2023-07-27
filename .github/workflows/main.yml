@@ -1,5 +1,6 @@
 name: A workflow for my App
 on: push
+
 jobs:
   UnitTests:
     name: Unit Tests
