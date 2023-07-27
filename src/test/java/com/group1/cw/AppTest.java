@@ -635,5 +635,36 @@ public class AppTest
         app.printAllCapitalCitiesInRegionByPopulation(city12);
     }
 
+    //Testing for Top Populated Capital Cities Report by Population
+    @Test
+    void printTopPopulatedCapitalCitiesTestNull()
+    {
+        app.printTopPopulatedCapitalCities(null);
+    }
+    @Test
+    void printTopPopulatedCapitalCitiesTestEmpty()
+    {
+        ArrayList<City> city13 = new ArrayList<City>();
+        app.printTopPopulatedCapitalCities(city13);
+    }
+    @Test
+    void printTopPopulatedCapitalCitiesTestContainsNull()
+    {
+        ArrayList<City> city13 = new ArrayList<City>();
+        city13.add(null);
+        app.printTopPopulatedCapitalCities(city13);
+    }
+    @Test
+    void printTopPopulatedCapitalCities()
+    {
+        ArrayList<City> city13 = new ArrayList<City>();
+        City cit = new City();
+        cit.Name = "Seoul";
+        cit.CountryCode = "South Korea";
+        cit.Population = 9981619;
+        city13.add(cit);
+        app.printTopPopulatedCapitalCities(city13);
+    }
+
 
 }
