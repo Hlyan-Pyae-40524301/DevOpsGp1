@@ -21,7 +21,11 @@ The query should provide accurate total population values for each continent, co
 
 **Screenshots**
 Before solve error
+![Image of Before Bug 2](../../images/bug3.jpg)
+![Image of Before Bug 2](../../images/bug4.jpg)
 After solve error
+![Image of After Bug 2](../../images/bug5.jpg)
+![Image of After Bug 2](../../images/bug6.jpg)
 
 **Desktop (please complete the following information):**
  - OS: [Windows 10]

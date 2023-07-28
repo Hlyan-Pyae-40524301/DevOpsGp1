@@ -22,8 +22,10 @@ GitHub Actions jobs should produce consistent and reliable results. If a job fai
 
 **Screenshots**
 Before solve error
+![Image of Before Bug 1](../../images/bug1.jpg)
 
 After solve error
+![Image of After Bug 1](../../images/bug2.jpg)
 
 **Desktop (please complete the following information):**
  - OS: [Windows 10]
