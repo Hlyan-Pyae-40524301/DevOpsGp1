@@ -29,13 +29,13 @@ These offer a cutting-edge environment for the creation and distribution of soft
 
 The role of our team members are –
 
-Ye Thiha Oo (Project Owner) – create repo and issues
+Ye Thiha Oo (Project Owner) – create repo and issues , Unit Test, Integration test, Query and Zube
 
-Hlyan Pyae (Scrum Master) – Github set up
+Hlyan Pyae (Scrum Master) – Github set up , Query, Unit Testing and Integration test , Deploying , fixed PMD violation, Update GitHub action
 
-Kaung Khant (Team Member) – README
+Kaung Khant (Team Member) – README and Used Case, Query, Unit Test and Integration test, Bug Report
 
-Zaw Ye Myat (Team Member) – Code of Conduct
+Zaw Ye Myat (Team Member) – Code of Conduct, Used Case, Query, Unit Test, Integration test and Bug Report
 
 
 
