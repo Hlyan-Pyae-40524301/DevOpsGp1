@@ -827,5 +827,34 @@ class AppTest
         app.printPopulationOfPeopleInCountry(country8);
     }
 
+    //Testing for Population Of People In World
+    @Test
+    void printPopulationOfPeopleInWorldTestNull()
+    {
+        app.printPopulationOfPeopleInWorld(null);
+    }
+    @Test
+    void printPopulationOfPeopleInWorldTestEmpty()
+    {
+        ArrayList<Country> country9 = new ArrayList<Country>();
+        app.printPopulationOfPeopleInWorld(country9);
+    }
+    @Test
+    void printPopulationOfPeopleInWorldTestContainsNull()
+    {
+        ArrayList<Country> country9 = new ArrayList<Country>();
+        country9.add(null);
+        app.printPopulationOfPeopleInWorld(country9);
+    }
+    @Test
+    void printPopulationOfPeopleInWorld()
+    {
+        ArrayList<Country> country9 = new ArrayList<Country>();
+        Country cou = new Country();
+        cou.TotalPopulation = 6078749450L;
+        country9.add(cou);
+        app.printPopulationOfPeopleInWorld(country9);
+    }
+
 
 }

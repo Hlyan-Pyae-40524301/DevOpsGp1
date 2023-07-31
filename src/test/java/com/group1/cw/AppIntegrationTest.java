@@ -305,4 +305,12 @@ class AppIntegrationTest
         assertEquals(cou.get(0).PeopleNotLivingInCities, 73966, "result should be");
         assertEquals(cou.get(0).PercentagePeopleNotLivingInCities, (float) 71.8117, "result should be");
     }
+
+    //Testing for Population Of People In World Report
+    @Test
+    void getPopulationOfPeopleInWorld()
+    {
+        ArrayList<Country> cou = app.getPopulationOfPeopleInWorld();
+        assertEquals(cou.get(0).TotalPopulation, 6078749450L, "result should be");
+    }
 }

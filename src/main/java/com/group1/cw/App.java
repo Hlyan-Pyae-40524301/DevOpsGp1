@@ -281,6 +281,12 @@ public class App
         // Print Population Of People In Country(country)
         a.printPopulationOfPeopleInCountry(country8);
 
+        // Population Of People In World
+        // Extract population information
+        ArrayList<Country> country9 = a.getPopulationOfPeopleInWorld();
+        // Print Population Of People In World(country)
+        a.printPopulationOfPeopleInWorld(country9);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -2087,7 +2093,7 @@ public class App
      */
     public void printPopulationOfPeopleInContinent(ArrayList<Country> country6)
     {
-        // Check city is not null
+        // Check country is not null
         if (country6 == null)
         {
             System.out.println("No Population Of People In Continent");
@@ -2169,7 +2175,7 @@ public class App
      */
     public void printPopulationOfPeopleInRegion(ArrayList<Country> country7)
     {
-        // Check city is not null
+        // Check country is not null
         if (country7 == null)
         {
             System.out.println("No Population Of People In Region");
@@ -2251,7 +2257,7 @@ public class App
      */
     public void printPopulationOfPeopleInCountry(ArrayList<Country> country8)
     {
-        // Check city is not null
+        // Check country is not null
         if (country8 == null)
         {
             System.out.println("No Population Of People In Country");
@@ -2271,6 +2277,72 @@ public class App
             String cou_string =
                     String.format("%-45s %-20s %-20s %-20s %-20s %-20s",
                             cou.Name, cou.TotalPopulation, cou.PeopleLivingInCities, cou.PercentagePeopleLivingInCities+"%", cou.PeopleNotLivingInCities, cou.PercentagePeopleNotLivingInCities+"%");
+            System.out.println(cou_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /** Gets the current City and Country.
+     * @return A list of population of people, people living in cities, and people not living in cities in World, or null if there is an error.
+     */
+    public ArrayList<Country> getPopulationOfPeopleInWorld()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM(country.Population) AS Total_World_Population FROM country;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Country information
+            ArrayList<Country> country9 = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country cou = new Country();
+                cou.TotalPopulation = rset.getLong("Total_World_Population");
+                country9.add(cou);
+            }
+            return country9;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get world details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of Capital Cities.
+     * @param country9 The list of city to print.
+     */
+    public void printPopulationOfPeopleInWorld(ArrayList<Country> country9)
+    {
+        // Check World Population is not null
+        if (country9 == null)
+        {
+            System.out.println("No Population Of People In World");
+            return;
+        }
+
+        // Title
+        System.out.println("Population Of People In World Report");
+
+        // Print header
+        System.out.println(String.format("%-45s", "TotalPopulation"));
+        // Loop over in the list
+        for (Country cou : country9)
+        {
+            if (cou == null)
+                continue;
+            String cou_string =
+                    String.format("%-45s", cou.TotalPopulation);
             System.out.println(cou_string);
         }
         System.out.println();
