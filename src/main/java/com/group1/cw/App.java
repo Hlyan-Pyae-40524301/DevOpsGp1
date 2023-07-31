@@ -36,7 +36,7 @@ public class App
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
-                System.out.println("Failed to connect to database attempt " +                                  Integer.toString(i));
+                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
             } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
@@ -272,6 +272,14 @@ public class App
         System.out.println(country7.size());
         // Print Population Of People In Region(country)
         a.printPopulationOfPeopleInRegion(country7);
+
+        // Population Of People In Country
+        // Extract population information
+        ArrayList<Country> country8 = a.getPopulationOfPeopleInCountry();
+        // Test the size of the returned data
+        System.out.println(country8.size());
+        // Print Population Of People In Country(country)
+        a.printPopulationOfPeopleInCountry(country8);
 
         // Disconnect from database
         a.disconnect();
@@ -2096,10 +2104,10 @@ public class App
         {
             if (cou == null)
                 continue;
-            String cit_string =
+            String cou_string =
                     String.format("%-20s %-20s %-20s %-20s %-20s %-20s",
                             cou.Continent, cou.TotalPopulation, cou.PeopleLivingInCities, cou.PercentagePeopleLivingInCities+"%", cou.PeopleNotLivingInCities, cou.PercentagePeopleNotLivingInCities+"%");
-            System.out.println(cit_string);
+            System.out.println(cou_string);
         }
         System.out.println();
         System.out.println();
@@ -2178,10 +2186,92 @@ public class App
         {
             if (cou == null)
                 continue;
-            String cit_string =
+            String cou_string =
                     String.format("%-30s %-20s %-20s %-20s %-20s %-20s",
                             cou.Region, cou.TotalPopulation, cou.PeopleLivingInCities, cou.PercentagePeopleLivingInCities+"%", cou.PeopleNotLivingInCities, cou.PercentagePeopleNotLivingInCities+"%");
-            System.out.println(cit_string);
+            System.out.println(cou_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /** Gets the current City and Country.
+     * @return A list of population of people, people living in cities, and people not living in cities in each Country, or null if there is an error.
+     */
+    public ArrayList<Country> getPopulationOfPeopleInCountry()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Name, " +
+                            "SUM(country.Population) AS total_population_in_country, " +
+                            "SUM(coalesce(city.Population, 0)) AS people_living_in_cities, " +
+                            "(SUM(coalesce(city.Population, 0)) / SUM(country.Population)) * 100 AS percentage_people_living_in_cities, " +
+                            "SUM(country.Population - coalesce(city.Population, 0)) AS people_not_living_in_cities, " +
+                            "((SUM(country.Population) - SUM(coalesce(city.Population, 0))) / SUM(country.Population)) * 100 AS percentage_people_not_living_in_cities " +
+                            "FROM country " +
+                            "LEFT JOIN (SELECT CountryCode, SUM(Population) AS Population " +
+                            "FROM city GROUP BY CountryCode) city " +
+                            "ON country.Code = city.CountryCode " +
+                            "GROUP BY country.Name; ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Country information
+            ArrayList<Country> country8 = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country cou = new Country();
+                cou.Name = rset.getString("country.Name");
+                cou.TotalPopulation = rset.getLong("total_population_in_country");
+                cou.PeopleLivingInCities = rset.getLong("people_living_in_cities");
+                cou.PercentagePeopleLivingInCities = rset.getFloat("percentage_people_living_in_cities");
+                cou.PeopleNotLivingInCities = rset.getLong("people_not_living_in_cities");
+                cou.PercentagePeopleNotLivingInCities = rset.getFloat("percentage_people_not_living_in_cities");
+                country8.add(cou);
+            }
+            return country8;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of Capital Cities.
+     * @param country8 The list of city to print.
+     */
+    public void printPopulationOfPeopleInCountry(ArrayList<Country> country8)
+    {
+        // Check city is not null
+        if (country8 == null)
+        {
+            System.out.println("No Population Of People In Country");
+            return;
+        }
+
+        // Title
+        System.out.println("Population Of People In Country Report");
+
+        // Print header
+        System.out.println(String.format("%-45s %-20s %-20s %-20s %-20s %-20s", "CountryName", "TotalPopulation", "PeopleInCity", "PeopleInCity(%)", "PeopleNotInCity", "PeopleNotInCity(%)"));
+        // Loop over capital cities in the list
+        for (Country cou : country8)
+        {
+            if (cou == null)
+                continue;
+            String cou_string =
+                    String.format("%-45s %-20s %-20s %-20s %-20s %-20s",
+                            cou.Name, cou.TotalPopulation, cou.PeopleLivingInCities, cou.PercentagePeopleLivingInCities+"%", cou.PeopleNotLivingInCities, cou.PercentagePeopleNotLivingInCities+"%");
+            System.out.println(cou_string);
         }
         System.out.println();
         System.out.println();

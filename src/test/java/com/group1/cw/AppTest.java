@@ -783,14 +783,48 @@ class AppTest
     {
         ArrayList<Country> country7 = new ArrayList<Country>();
         Country cou = new Country();
-        cou.Continent = "Caribbean";
+        cou.Region = "Caribbean";
         cou.TotalPopulation = 38140000;
         cou.PeopleLivingInCities = 11067550;
         cou.PercentagePeopleLivingInCities = (float) 29.0182;
         cou.PeopleNotLivingInCities = 27072450;
         cou.PercentagePeopleNotLivingInCities = (float) 70.9818;
         country7.add(cou);
-        app.printPopulationOfPeopleInContinent(country7);
+        app.printPopulationOfPeopleInRegion(country7);
+    }
+
+    //Testing for Population Of People In Country
+    @Test
+    void printPopulationOfPeopleInCountryTestNull()
+    {
+        app.printPopulationOfPeopleInCountry(null);
+    }
+    @Test
+    void printPopulationOfPeopleInCountryTestEmpty()
+    {
+        ArrayList<Country> country8 = new ArrayList<Country>();
+        app.printPopulationOfPeopleInCountry(country8);
+    }
+    @Test
+    void printPopulationOfPeopleInCountryTestContainsNull()
+    {
+        ArrayList<Country> country8 = new ArrayList<Country>();
+        country8.add(null);
+        app.printPopulationOfPeopleInCountry(country8);
+    }
+    @Test
+    void printPopulationOfPeopleInCountry()
+    {
+        ArrayList<Country> country8 = new ArrayList<Country>();
+        Country cou = new Country();
+        cou.Name = "Aruba";
+        cou.TotalPopulation = 103000;
+        cou.PeopleLivingInCities = 29034;
+        cou.PercentagePeopleLivingInCities = (float) 28.1883;
+        cou.PeopleNotLivingInCities = 73966;
+        cou.PercentagePeopleNotLivingInCities = (float) 71.8117;
+        country8.add(cou);
+        app.printPopulationOfPeopleInCountry(country8);
     }
 
 
