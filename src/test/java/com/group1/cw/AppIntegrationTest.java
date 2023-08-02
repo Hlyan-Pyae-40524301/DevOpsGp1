@@ -352,4 +352,12 @@ class AppIntegrationTest
         assertEquals(cou.get(0).PeopleNotLivingInCities, 39408000, "result should be");
         assertEquals(cou.get(0).PercentagePeopleNotLivingInCities, (float) 86.4002, "result should be");
     }
+
+    //Testing for Population Of People In A District Report
+    @Test
+    void getPopulationOfPeopleInADistrict()
+    {
+        ArrayList<City> cit = app.getPopulationOfPeopleInADistrict();
+        assertEquals(cit.get(0).TotalPopulation, 1118600, "result should be");
+    }
 }

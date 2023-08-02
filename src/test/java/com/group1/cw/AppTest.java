@@ -958,5 +958,34 @@ class AppTest
         app.printPopulationOfPeopleInACountry(country12);
     }
 
+    //Testing for Population Of People In A District
+    @Test
+    void printPopulationOfPeopleInADistrictTestNull()
+    {
+        app.printPopulationOfPeopleInADistrict(null);
+    }
+    @Test
+    void printPopulationOfPeopleInADistrictTestEmpty()
+    {
+        ArrayList<City> city16 = new ArrayList<City>();
+        app.printPopulationOfPeopleInADistrict(city16);
+    }
+    @Test
+    void printPopulationOfPeopleInADistrictTestContainsNull()
+    {
+        ArrayList<City> city16 = new ArrayList<City>();
+        city16.add(null);
+        app.printPopulationOfPeopleInADistrict(city16);
+    }
+    @Test
+    void printPopulationOfPeopleInADistrict()
+    {
+        ArrayList<City> city16 = new ArrayList<City>();
+        City cit = new City();
+        cit.TotalPopulation = 1118600;
+        city16.add(cit);
+        app.printPopulationOfPeopleInADistrict(city16);
+    }
+
 
 }

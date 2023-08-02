@@ -29,4 +29,9 @@ public class City
      * City's Population
      */
     public int Population;
+
+    /**
+     * Total Population
+     */
+    public long TotalPopulation;
 }

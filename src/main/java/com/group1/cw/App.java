@@ -305,6 +305,12 @@ public class App
         // Print Population Of People In A Country(country)
         a.printPopulationOfPeopleInACountry(country12);
 
+        // Population Of People In A District
+        // Extract population information
+        ArrayList<City> city16 = a.getPopulationOfPeopleInADistrict();
+        // Print Population Of People In District(city)
+        a.printPopulationOfPeopleInADistrict(city16);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -2610,6 +2616,74 @@ public class App
             String cou_string =
                     String.format("%-20s %-20s %-20s %-20s %-20s %-20s",
                             cou.Name, cou.TotalPopulation, cou.PeopleLivingInCities, cou.PercentagePeopleLivingInCities+"%", cou.PeopleNotLivingInCities, cou.PercentagePeopleNotLivingInCities+"%");
+            System.out.println(cou_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /** Gets the current City and Country.
+     * @return A list of population of people in district, or null if there is an error.
+     */
+    public ArrayList<City> getPopulationOfPeopleInADistrict()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM(city.Population) AS Total_Population_of_Mandalay_District " +
+                            "FROM city " +
+                            "WHERE city.District='Mandalay';";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Country information
+            ArrayList<City> city16 = new ArrayList<City>();
+            while (rset.next())
+            {
+                City cit = new City();
+                cit.TotalPopulation = rset.getLong("Total_Population_of_Mandalay_District");
+                city16.add(cit);
+            }
+            return city16;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get district details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of Capital Cities.
+     * @param city16 The list of city to print.
+     */
+    public void printPopulationOfPeopleInADistrict(ArrayList<City> city16)
+    {
+        // Check District Population is not null
+        if (city16 == null)
+        {
+            System.out.println("No Population Of People In A District (Mandalay)");
+            return;
+        }
+
+        // Title
+        System.out.println("Population Of People In A District (Mandalay) Report");
+
+        // Print header
+        System.out.println(String.format("%-45s", "TotalPopulation"));
+        // Loop over in the list
+        for (City cit : city16)
+        {
+            if (cit == null)
+                continue;
+            String cou_string =
+                    String.format("%-45s", cit.TotalPopulation);
             System.out.println(cou_string);
         }
         System.out.println();
