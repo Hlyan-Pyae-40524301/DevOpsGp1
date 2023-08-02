@@ -326,4 +326,17 @@ class AppIntegrationTest
         assertEquals(cou.get(0).PeopleNotLivingInCities, 3007421597L, "result should be");
         assertEquals(cou.get(0).PercentagePeopleNotLivingInCities, (float) 81.1714, "result should be");
     }
+
+    //Testing for Population Of People In Region Report
+    @Test
+    void getPopulationOfPeopleInARegion()
+    {
+        ArrayList<Country> cou = app.getPopulationOfPeopleInARegion();
+        assertEquals(cou.get(0).Region, "Southeast Asia", "result should be");
+        assertEquals(cou.get(0).TotalPopulation, 518541000, "result should be");
+        assertEquals(cou.get(0).PeopleLivingInCities, 102067225, "result should be");
+        assertEquals(cou.get(0).PercentagePeopleLivingInCities, (float) 19.6835, "result should be");
+        assertEquals(cou.get(0).PeopleNotLivingInCities, 416473775, "result should be");
+        assertEquals(cou.get(0).PercentagePeopleNotLivingInCities, (float) 80.3165, "result should be");
+    }
 }

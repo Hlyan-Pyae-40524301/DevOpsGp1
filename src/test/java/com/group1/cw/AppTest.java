@@ -890,5 +890,39 @@ class AppTest
         app.printPopulationOfPeopleInAContinent(country10);
     }
 
+    //Testing for Population Of People In A Region
+    @Test
+    void printPopulationOfPeopleInARegionTestNull()
+    {
+        app.printPopulationOfPeopleInARegion(null);
+    }
+    @Test
+    void printPopulationOfPeopleInARegionTestEmpty()
+    {
+        ArrayList<Country> country11 = new ArrayList<Country>();
+        app.printPopulationOfPeopleInARegion(country11);
+    }
+    @Test
+    void printPopulationOfPeopleInARegionTestContainsNull()
+    {
+        ArrayList<Country> country11 = new ArrayList<Country>();
+        country11.add(null);
+        app.printPopulationOfPeopleInARegion(country11);
+    }
+    @Test
+    void printPopulationOfPeopleInARegion()
+    {
+        ArrayList<Country> country11 = new ArrayList<Country>();
+        Country cou = new Country();
+        cou.Region = "Southeast Asia";
+        cou.TotalPopulation = 518541000;
+        cou.PeopleLivingInCities = 102067225;
+        cou.PercentagePeopleLivingInCities = (float) 19.6835;
+        cou.PeopleNotLivingInCities = 416473775;
+        cou.PercentagePeopleNotLivingInCities = (float) 80.3165;
+        country11.add(cou);
+        app.printPopulationOfPeopleInARegion(country11);
+    }
+
 
 }

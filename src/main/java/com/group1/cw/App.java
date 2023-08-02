@@ -293,6 +293,12 @@ public class App
         // Print Population Of People In A Continent(country)
         a.printPopulationOfPeopleInAContinent(country10);
 
+        // Population Of People In A Region
+        // Extract population information
+        ArrayList<Country> country11 = a.getPopulationOfPeopleInARegion();
+        // Print Population Of People In A Region(country)
+        a.printPopulationOfPeopleInARegion(country11);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -2401,7 +2407,7 @@ public class App
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country details");
+            System.out.println("Failed to get continent details");
             return null;
         }
     }
@@ -2432,6 +2438,89 @@ public class App
             String cou_string =
                     String.format("%-20s %-20s %-20s %-20s %-20s %-20s",
                             cou.Continent, cou.TotalPopulation, cou.PeopleLivingInCities, cou.PercentagePeopleLivingInCities+"%", cou.PeopleNotLivingInCities, cou.PercentagePeopleNotLivingInCities+"%");
+            System.out.println(cou_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /** Gets the current City and Country.
+     * @return A list of population of people in a Region, or null if there is an error.
+     */
+    public ArrayList<Country> getPopulationOfPeopleInARegion()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Region, " +
+                            "SUM(country.Population) AS total_population_of_Southeast_Asia, " +
+                            "SUM(coalesce(city.Population, 0)) AS people_living_in_cities, " +
+                            "(SUM(coalesce(city.Population, 0)) / SUM(country.Population)) * 100 AS percentage_people_living_in_cities, " +
+                            "SUM(country.Population - coalesce(city.Population, 0)) AS people_not_living_in_cities, " +
+                            "((SUM(country.Population) - SUM(coalesce(city.Population, 0))) / SUM(country.Population)) * 100 AS percentage_people_not_living_in_cities " +
+                            "FROM country " +
+                            "LEFT JOIN (SELECT CountryCode, SUM(Population) AS Population " +
+                            "FROM city GROUP BY CountryCode) city " +
+                            "ON country.Code = city.CountryCode " +
+                            "WHERE country.Region='Southeast Asia'" +
+                            "GROUP BY country.Region; ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Country information
+            ArrayList<Country> country11 = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country cou = new Country();
+                cou.Region = rset.getString("country.Region");
+                cou.TotalPopulation = rset.getLong("total_population_of_Southeast_Asia");
+                cou.PeopleLivingInCities = rset.getLong("people_living_in_cities");
+                cou.PercentagePeopleLivingInCities = rset.getFloat("percentage_people_living_in_cities");
+                cou.PeopleNotLivingInCities = rset.getLong("people_not_living_in_cities");
+                cou.PercentagePeopleNotLivingInCities = rset.getFloat("percentage_people_not_living_in_cities");
+                country11.add(cou);
+            }
+            return country11;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get region details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of Capital Cities.
+     * @param country11 The list of city to print.
+     */
+    public void printPopulationOfPeopleInARegion(ArrayList<Country> country11)
+    {
+        // Check country is not null
+        if (country11 == null)
+        {
+            System.out.println("No Population Of People In A Region (Southeast Asia)");
+            return;
+        }
+
+        // Title
+        System.out.println("Population Of People In A Region (Southeast Asia) Report");
+
+        // Print header
+        System.out.println(String.format("%-30s %-20s %-20s %-20s %-20s %-20s", "RegionName", "TotalPopulation", "PeopleInCity", "PeopleInCity(%)", "PeopleNotInCity", "PeopleNotInCity(%)"));
+        // Loop over capital cities in the list
+        for (Country cou : country11)
+        {
+            if (cou == null)
+                continue;
+            String cou_string =
+                    String.format("%-30s %-20s %-20s %-20s %-20s %-20s",
+                            cou.Region, cou.TotalPopulation, cou.PeopleLivingInCities, cou.PercentagePeopleLivingInCities+"%", cou.PeopleNotLivingInCities, cou.PercentagePeopleNotLivingInCities+"%");
             System.out.println(cou_string);
         }
         System.out.println();
