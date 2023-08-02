@@ -987,5 +987,34 @@ class AppTest
         app.printPopulationOfPeopleInADistrict(city16);
     }
 
+    //Testing for Population Of People In A City
+    @Test
+    void printPopulationOfPeopleInACityTestNull()
+    {
+        app.printPopulationOfPeopleInACity(null);
+    }
+    @Test
+    void printPopulationOfPeopleInACityTestEmpty()
+    {
+        ArrayList<City> city17 = new ArrayList<City>();
+        app.printPopulationOfPeopleInACity(city17);
+    }
+    @Test
+    void printPopulationOfPeopleInACityTestContainsNull()
+    {
+        ArrayList<City> city17 = new ArrayList<City>();
+        city17.add(null);
+        app.printPopulationOfPeopleInACity(city17);
+    }
+    @Test
+    void printPopulationOfPeopleInACity()
+    {
+        ArrayList<City> city17 = new ArrayList<City>();
+        City cit = new City();
+        cit.TotalPopulation = 885300;
+        city17.add(cit);
+        app.printPopulationOfPeopleInACity(city17);
+    }
+
 
 }

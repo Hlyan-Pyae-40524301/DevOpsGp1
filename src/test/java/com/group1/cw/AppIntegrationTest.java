@@ -360,4 +360,12 @@ class AppIntegrationTest
         ArrayList<City> cit = app.getPopulationOfPeopleInADistrict();
         assertEquals(cit.get(0).TotalPopulation, 1118600, "result should be");
     }
+
+    //Testing for Population Of People In A City Report
+    @Test
+    void getPopulationOfPeopleInACity()
+    {
+        ArrayList<City> cit = app.getPopulationOfPeopleInACity();
+        assertEquals(cit.get(0).TotalPopulation, 885300, "result should be");
+    }
 }
