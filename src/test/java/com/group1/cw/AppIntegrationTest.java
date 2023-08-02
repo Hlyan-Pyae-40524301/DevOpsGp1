@@ -313,4 +313,17 @@ class AppIntegrationTest
         ArrayList<Country> cou = app.getPopulationOfPeopleInWorld();
         assertEquals(cou.get(0).TotalPopulation, 6078749450L, "result should be");
     }
+
+    //Testing for Population Of People In A Continent Report
+    @Test
+    void getPopulationOfPeopleInAContinent()
+    {
+        ArrayList<Country> cou = app.getPopulationOfPeopleInAContinent();
+        assertEquals(cou.get(0).Continent, "Asia", "result should be");
+        assertEquals(cou.get(0).TotalPopulation, 3705025700L, "result should be");
+        assertEquals(cou.get(0).PeopleLivingInCities, 697604103, "result should be");
+        assertEquals(cou.get(0).PercentagePeopleLivingInCities, (float) 18.8286, "result should be");
+        assertEquals(cou.get(0).PeopleNotLivingInCities, 3007421597L, "result should be");
+        assertEquals(cou.get(0).PercentagePeopleNotLivingInCities, (float) 81.1714, "result should be");
+    }
 }

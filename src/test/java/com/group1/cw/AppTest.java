@@ -856,5 +856,39 @@ class AppTest
         app.printPopulationOfPeopleInWorld(country9);
     }
 
+    //Testing for Population Of People In A Continent
+    @Test
+    void printPopulationOfPeopleInAContinentTestNull()
+    {
+        app.printPopulationOfPeopleInAContinent(null);
+    }
+    @Test
+    void printPopulationOfPeopleInAContinentTestEmpty()
+    {
+        ArrayList<Country> country10 = new ArrayList<Country>();
+        app.printPopulationOfPeopleInAContinent(country10);
+    }
+    @Test
+    void printPopulationOfPeopleInAContinentTestContainsNull()
+    {
+        ArrayList<Country> country10 = new ArrayList<Country>();
+        country10.add(null);
+        app.printPopulationOfPeopleInAContinent(country10);
+    }
+    @Test
+    void printPopulationOfPeopleInAContinent()
+    {
+        ArrayList<Country> country10 = new ArrayList<Country>();
+        Country cou = new Country();
+        cou.Continent = "Asia";
+        cou.TotalPopulation = 3705025700L;
+        cou.PeopleLivingInCities = 697604103;
+        cou.PercentagePeopleLivingInCities = (float) 18.8286;
+        cou.PeopleNotLivingInCities = 3007421597L;
+        cou.PercentagePeopleNotLivingInCities = (float) 81.1714;
+        country10.add(cou);
+        app.printPopulationOfPeopleInAContinent(country10);
+    }
+
 
 }
