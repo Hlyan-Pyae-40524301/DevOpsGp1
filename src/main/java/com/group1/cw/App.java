@@ -78,6 +78,8 @@ public class App
 //        Country cou = a.getCountry(129);
 //        // Display results
 //        a.displayCountry(cou);
+//        // Get Country Language
+//        CountryLanguage lag = a.getLanguage(5.3F);
 
 
         // Countries
@@ -317,6 +319,12 @@ public class App
         // Print Population Of People In City(city)
         a.printPopulationOfPeopleInACity(city17);
 
+        // the number of people who speak Chinese. English, Hindi, Spanish, Arabic from greatest number to smallest
+        // Extract population information
+        ArrayList<CountryLanguage> language1 = a.getLanguage();
+        // Print the number of people who speak Chinese. English, Hindi, Spanish, Arabic from greatest number to smallest(city)
+        a.printLanguage(language1);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -431,6 +439,44 @@ public class App
 //        {
 //            System.out.println(e.getMessage());
 //            System.out.println("Failed to get city details");
+//            return null;
+//        }
+//    }
+//
+//    /**
+//     * getLanguage
+//     */
+//    public CountryLanguage getLanguage(float Percentage)
+//    {
+//        try
+//        {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "SELECT CountryCode, Language, IsOfficial, Percentage "
+//                            + "FROM countrylanguage "
+//                            + "WHERE Percentage = " + Percentage;
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            // Return new city if valid.
+//            // Check one is returned
+//            if (rset.next())
+//            {
+//                CountryLanguage lag = new CountryLanguage();
+//                lag.CountryCode = rset.getString("CountryCode");
+//                lag.Language = rset.getString("Language");
+//                lag.IsOfficial = rset.getString("IsOfficial");
+//                lag.Percentage = rset.getFloat("Percentage");
+//                return lag;
+//            }
+//            else
+//                return null;
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get language details");
 //            return null;
 //        }
 //    }
@@ -2688,9 +2734,9 @@ public class App
         {
             if (cit == null)
                 continue;
-            String cou_string =
+            String cit_string =
                     String.format("%-45s", cit.TotalPopulation);
-            System.out.println(cou_string);
+            System.out.println(cit_string);
         }
         System.out.println();
         System.out.println();
@@ -2756,9 +2802,87 @@ public class App
         {
             if (cit == null)
                 continue;
-            String cou_string =
+            String cit_string =
                     String.format("%-45s", cit.TotalPopulation);
-            System.out.println(cou_string);
+            System.out.println(cit_string);
+        }
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+    }
+
+    /** Gets the current City and Country.
+     * @return A list of the number of people who speak Chinese. English, Hindi, Spanish, Arabic from the greatest number to smallest, or null if there is an error.
+     */
+    public ArrayList<CountryLanguage> getLanguage()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT countrylanguage.Language, " +
+                            "ROUND (SUM((country.Population * countrylanguage.Percentage)/100),0) " +
+                            "AS total_population, " +
+                            "(SUM((country.Population * countrylanguage.Percentage)/100) / (SELECT SUM(Population) " +
+                            "FROM country))*100 AS percentage_in_world " +
+                            "FROM countrylanguage " +
+                            "JOIN country ON country.Code = countrylanguage.CountryCode " +
+                            "WHERE countrylanguage.Language " +
+                            "IN ('Chinese', 'English', 'Hindi', 'Spanish', 'Arabic')" +
+                            "GROUP BY countrylanguage.Language;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract Country information
+            ArrayList<CountryLanguage> language1 = new ArrayList<CountryLanguage>();
+            while (rset.next())
+            {
+                CountryLanguage lang = new CountryLanguage();
+                lang.Language = rset.getString("countrylanguage.Language");
+                lang.TotalPopulation = rset.getLong("total_population");
+                lang.TotalPercentage = rset.getFloat("percentage_in_world");
+                language1.add(lang);
+            }
+            return language1;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get language details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of Language and Country.
+     * @param language1 The list of Language to print.
+     */
+    public void printLanguage(ArrayList<CountryLanguage> language1)
+    {
+        // Check country is not null
+        if (language1 == null)
+        {
+            System.out.println("No Language");
+            return;
+        }
+
+        // Title
+        System.out.println("The Number of people who speak Chinese. English, Hindi, Spanish, Arabic from the greatest number to smallest Report");
+
+        // Print header
+        System.out.println(String.format("%-20s %-20s %-20s", "Language", "TotalPopulation", "TotalPercentage(%)"));
+        // Loop over languages in the list
+        for (CountryLanguage lang : language1)
+        {
+            if (lang == null)
+                continue;
+            String lang_string =
+                    String.format("%-20s %-20s %-20s",
+                            lang.Language, lang.TotalPopulation, lang.TotalPercentage+"%");
+            System.out.println(lang_string);
         }
         System.out.println();
         System.out.println();

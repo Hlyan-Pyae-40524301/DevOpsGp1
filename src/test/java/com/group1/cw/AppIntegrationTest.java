@@ -368,4 +368,14 @@ class AppIntegrationTest
         ArrayList<City> cit = app.getPopulationOfPeopleInACity();
         assertEquals(cit.get(0).TotalPopulation, 885300, "result should be");
     }
+
+    //Testing for The Number of people who speak Chinese. English, Hindi, Spanish, Arabic from the greatest number to smallest Report
+    @Test
+    void getLanguage()
+    {
+        ArrayList<CountryLanguage> lang = app.getLanguage();
+        assertEquals(lang.get(0).Language, "English", "result should be");
+        assertEquals(lang.get(0).TotalPopulation, 347077867, "result should be");
+        assertEquals(lang.get(0).TotalPercentage, (float) 5.709692, "result should be");
+    }
 }

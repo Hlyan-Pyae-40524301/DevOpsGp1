@@ -1016,5 +1016,36 @@ class AppTest
         app.printPopulationOfPeopleInACity(city17);
     }
 
+    //Testing for The Number of people who speak Chinese. English, Hindi, Spanish, Arabic from the greatest number to smallest Report
+    @Test
+    void printLanguageTestNull()
+    {
+        app.printLanguage(null);
+    }
+    @Test
+    void printLanguageTestEmpty()
+    {
+        ArrayList<CountryLanguage> language1 = new ArrayList<CountryLanguage>();
+        app.printLanguage(language1);
+    }
+    @Test
+    void printLanguageTestContainsNull()
+    {
+        ArrayList<CountryLanguage> language1 = new ArrayList<CountryLanguage>();
+        language1.add(null);
+        app.printLanguage(language1);
+    }
+    @Test
+    void printLanguage()
+    {
+        ArrayList<CountryLanguage> language1 = new ArrayList<CountryLanguage>();
+        CountryLanguage lang = new CountryLanguage();
+        lang.Language = "English";
+        lang.TotalPopulation = 347077867L;
+        lang.TotalPercentage = 5.709692F;
+        language1.add(lang);
+        app.printLanguage(language1);
+    }
+
 
 }
