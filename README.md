@@ -28,7 +28,7 @@
 
 
 ### Code coverage of test for master
-[![codecov](https://codecov.io/gh/Hlyan-Pyae-40524301/DevOpsGp1/branch/Hlyan_Pyae/graph/badge.svg?token=9AKL48BO18)](https://codecov.io/gh/Hlyan-Pyae-40524301/DevOpsGp1)
+[![codecov](https://codecov.io/gh/Hlyan-Pyae-40524301/DevOpsGp1/branch/master/graph/badge.svg?token=9AKL48BO18)](https://codecov.io/gh/Hlyan-Pyae-40524301/DevOpsGp1)
 
 Setting up our development environment for the module is the goal of this lab. The majority of the tools we will put up today are among the many that we will use in the module. The systems we'll employ are:
 
