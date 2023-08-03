@@ -1,14 +1,33 @@
 # ReadMe
-# Software Engineering Methods
+### Workflow
 
-![workflow](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/actions/workflows/main.yml/badge.svg)
+[![workflow](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/actions/workflows/main.yml/badge.svg)](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/actions/workflows/main.yml)
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Hlyan-Pyae-40524301/DevOpsGp1/main.yml)
+
+### Master 
+
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Hlyan-Pyae-40524301/DevOpsGp1/main.yml?banch=master)
+
+[![Build Status](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/actions?query=branch%3Amaster)
+
+
+### Develop
+
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/Hlyan-Pyae-40524301/DevOpsGp1/main.yml?banch=develop)
+
+[![Build Status](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/actions/workflows/main.yml/badge.svg?branch=develop)](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/actions?query=branch%3Adevelop)
+
+
+### License
 
 [![LICENSE](https://img.shields.io/github/license/Hlyan-Pyae-40524301/DevOpsGp1.svg?style=flat-square)](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/blob/master/LICENSE)
 
+
+### Releases
 [![Releases](https://img.shields.io/github/release/Hlyan-Pyae-40524301/DevOpsGp1/all.svg?style=flat-square)](https://github.com/Hlyan-Pyae-40524301/DevOpsGp1/releases)
 
+
+### Code coverage of test for master
 [![codecov](https://codecov.io/gh/Hlyan-Pyae-40524301/DevOpsGp1/branch/Hlyan_Pyae/graph/badge.svg?token=9AKL48BO18)](https://codecov.io/gh/Hlyan-Pyae-40524301/DevOpsGp1)
 
 Setting up our development environment for the module is the goal of this lab. The majority of the tools we will put up today are among the many that we will use in the module. The systems we'll employ are:
